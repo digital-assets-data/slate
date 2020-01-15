@@ -2,7 +2,7 @@
 title: DAD API Reference
 
 toc_footers:
-  - <a href='https://app.digitalassetsdata.com/access-keys'>Manage API Keys</a>
+  - <a href='https://app.digitalassetsdata.com/access-keys' target="_blank">Manage API Keys</a>
 
 search: true
 ---
@@ -11,7 +11,7 @@ search: true
 
 Welcome to the Digital Assets Data API documentation. This documentation provides detailed instructions for leveraging the DAD API. If you are looking to consume our market data outside of the platform, you have come to the right place.
 
-If you need assistance consuming data from our APIs after reviewing this documentation, please reach out to us at [support@digitalassetsdata.com](mailto:support@digitalassetsdata.com).
+If you need assistance consuming data from our APIs after reviewing this documentation, please reach out to us at <a href="mailto:support@digitalassetsdata.com" target="_blank">support@digitalassetsdata.com</a>.
 
 We currently support two methods for retrieving data:
 
@@ -22,7 +22,7 @@ Websockets are ideal for ingesting large volumes of data continuously on an ongo
 
 # Authentication
 
-You will need to authenticate in order to access either the GraphQL endpoints or the websockets using public and private keys. You can retrieve your public key and generate a private key [here](https://app.digitalassetsdata.com/access-keys).
+You will need to authenticate in order to access either the GraphQL endpoints or the websockets using public and private keys. You can retrieve your public key and generate a private key <a href="https://app.digitalassetsdata.com/access-keys" target="_blank">here</a>.
 
 You will need to include your public and private keys in the header of the request. That will look like this:
 
@@ -43,9 +43,9 @@ You will need both a public and private key to authenticate.
 
 # GraphQL
 
-GraphQL is a more flexible alternative to the traditional REST framework. If you are new to GraphQL, we recommend engaging with the introduction materials on their [website](https://graphql.org/learn/).
+GraphQL is a more flexible alternative to the traditional REST framework. If you are new to GraphQL, we recommend engaging with the introduction materials on their <a href="https://graphql.org/learn/" target="_blank">website</a>.
 
-If you are already comfortable with GraphQL you can review additional documentation and test your connection and your queries using our [GraphQL Explorer](https://api.digitalassetsdata.com/graphql/).
+If you are already comfortable with GraphQL you can review additional documentation and test your connection and your queries using our <a href="https://api.digitalassetsdata.com/graphql/" target="_blank">GraphQL Explorer</a>.
 
 While GraphQL provides a flexible query language for interacting with our APIs that will enable you to pull exactly what you need (and no more), we have documented the most common use cases with code snippets and example responses below. Feel free to test these code snippets yourself in the GraphQL Explorer.
 
