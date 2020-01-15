@@ -263,62 +263,105 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='https://app.digitalassetsdata.com/access-keys'>Manage API Keys</a></li>
+            <li><a href='https://app.digitalassetsdata.com/access-keys' target="_blank">Manage API Keys</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Digital Assets Data API documentation. This documentation provides detailed instructions for leveraging the DAD API. If you are looking to consume our market data outside of the platform, you have come to the right place.</p>
-
-<p>If you need assistance consuming data from our APIs after reviewing this documentation, please reach out to us at <a href="mailto:support@digitalassetsdata.com">support@digitalassetsdata.com</a>.</p>
-
-<p>We currently support two methods for retrieving data:</p>
-
-<ol>
-<li>Batch requests (pull) through GraphQL</li>
-<li>Continuous feeds (push) via websockets</li>
-</ol>
-
-<p>Websockets are ideal for ingesting large volumes of data continuously on an ongoing basis. If you&#39;re looking to pull a specific subset of data, especially historical data, then you should use the GraphQL endpoints.</p>
+<p>Welcome to the Digital Assets Data API documentation. This documentation provides detailed instructions for leveraging the DAD API. If you are looking to consume our market data outside of the platform, you have come to the right place.
+If you need assistance consuming data from our APIs after reviewing this documentation, please reach out to us at <a href="mailto:support@digitalassetsdata.com" target="_blank">support@digitalassetsdata.com</a>.
+We currently support two methods for retrieving data:
+1. Batch requests (pull) through GraphQL
+2. Continuous feeds (push) via websockets
+Websockets are ideal for ingesting large volumes of data continuously on an ongoing basis. If you&#39;re looking to pull a specific subset of data, especially historical data, then you should use the GraphQL endpoints.</p>
 <h1 id='authentication'>Authentication</h1>
-<p>You will need to authenticate in order to access either the GraphQL endpoints or the websockets using public and private keys. You can retrieve your public key and generate a private key <a href="https://app.digitalassetsdata.com/access-keys">here</a>.</p>
-
-<p>You will need to include your public and private keys in the header of the request. That will look like this:</p>
-
-<p><code>DAD-PUBLIC-KEY=foo</code><br>
-<code>DAD-PRIVATE-KEY=bar</code></p>
+<blockquote>
+<p>Authenticating via request headers:</p>
+</blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">dad</span><span class="p">(</span><span class="n">DAD</span><span class="o">-</span><span class="n">PUBLIC</span><span class="o">-</span><span class="n">KEY</span><span class="o">=</span><span class="n">foo</span><span class="p">,</span> <span class="n">DAD</span><span class="o">-</span><span class="n">PRIVATE</span><span class="o">-</span><span class="n">KEY</span><span class="o">=</span><span class="n">bar</span><span class="p">)</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'DAD-PUBLIC-KEY'</span><span class="p">:</span> <span class="s">'foo'</span><span class="p">,</span>
+  <span class="s">'DAD-PRIVATE-KEY'</span><span class="p">:</span> <span class="s">'bar'</span>
+<span class="p">}</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s">'''
+  {
+    apiViewer {
+      username
+    }
+  }
+'''</span>
+<span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'query'</span><span class="p">:</span> <span class="n">query</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+  <span class="s">'https://api.digitalassetsdata.com/graphql/'</span><span class="p">,</span>
+  <span class="n">json</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
+  <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+<span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
+<blockquote>
+<p>Authenticating via graphql arguments:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+    apiViewer(publicKey: "foo" privateKey: "bar") {
+        username
+    }
+}
+</code></pre>
+<p>You will need to authenticate in order to access either the GraphQL endpoints or the websockets using public and private keys. You can retrieve your public key and generate a private key <a href="https://app.digitalassetsdata.com/access-keys" target="_blank">here</a>.
+For websockets, you will need to include your public and private keys as query parameters. That will look like this:</p>
+
+<p><code>wss://api.digitalassetsdata.com/exchange/coinbase?publicKey={foo}&amp;privateKey={bar}</code></p>
+
+<p>For GraphQL requests, the public and private keys will need to be included in the request headers. A sample code snippet for Python is shown to the right.</p>
+
+<p>If you&#39;re using the <a href="https://api.digitalassetsdata.com/graphql/">GraphQL Explorer</a> you can include your keys as arguments to <code>apiViewer</code></p>
+
 <p>Make sure to replace <code>foo</code> and <code>bar</code> with your public and private key, respectively. Your public key will never change, and if you lose your private key you can generate a new one anytime.</p>
 
 <aside class="notice">
 You will need both a public and private key to authenticate.
 </aside>
 <h1 id='graphql'>GraphQL</h1>
-<p>GraphQL is a more flexible alternative to the traditional REST framework. If you are new to GraphQL, we recommend engaging with the introduction materials on their <a href="https://graphql.org/learn/">website</a>.</p>
+<p>GraphQL is a more flexible alternative to the traditional REST framework. If you are new to GraphQL, we recommend engaging with the introduction materials on their <a href="https://graphql.org/learn/" target="_blank">website</a>.
+If you are already comfortable with GraphQL you can review additional documentation and test your connection and your queries using our <a href="https://api.digitalassetsdata.com/graphql/" target="_blank">GraphQL Explorer</a>.</p>
 
-<p>If you are already comfortable with GraphQL you can review additional documentation and test your connection and your queries using our <a href="https://api.digitalassetsdata.com/graphql/">GraphQL Explorer</a>.</p>
-
-<p>While GraphQL provides a flexible query language for interacting with our APIs that will enable you to pull exactly what you need (and no more), we have documented the most common use cases with code snippets and example responses below. Feel free to test these code snippets yourself in the GraphQL Explorer.</p>
+<blockquote>
+<p>Sample connection test:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{ 
+    apiViewer(publicKey:"foo" privateKey:"bar") {
+        username
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@digitalassetsdata.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>You can test your connection by opening the GraphQL explorer and copying the code snippet to the right into the query editor in the left panel, swapping in your public and private keys, and then pressing the <code>play</code> button in the header. If the connection was successful, your username will be returned. If the connection was unsuccessful, you will get an error message. If that&#39;s the case, double check that you&#39;ve entered your API keys correctly.
+While GraphQL provides a flexible query language for interacting with our APIs that will enable you to pull exactly what you need (and no more), we have documented the most common use cases with code snippets and example responses below. Feel free to test these code snippets yourself in the GraphQL Explorer.</p>
 <h2 id='supported-exchanges-pairs'>Supported Exchanges / Pairs</h2>
-<p>You can use the supported exchanges endpoint to determine which exchanges and pairs are currently supported through the API.</p>
-
 <blockquote>
 <p>Sample request:</p>
 </blockquote>
 <pre class="highlight plaintext"><code>{ 
     apiViewer(publicKey:"foo=" privateKey:"bar") {
-    supportedExchanges{
+    supportedExchanges (dadExchangeId: "Coinbase") {
       dadExchangeId
       pairs
     }
   }
 }
-
 </code></pre>
 <blockquote>
 <p>Sample response:</p>
@@ -345,8 +388,9 @@ You will need both a public and private key to authenticate.
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre>
+<p>You can use the supported exchanges endpoint to determine which exchanges and pairs are currently supported through the API.</p>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -356,15 +400,32 @@ You will need both a public and private key to authenticate.
 </tr>
 </thead><tbody>
 <tr>
-<td>exchange</td>
-<td>Yes</td>
-<td>coinbase</td>
+<td>forPair</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized pair/symbol</td>
+</tr>
+<tr>
+<td>dadExchangeId</td>
+<td>No</td>
+<td>N/A</td>
 <td>The DAD exchange key</td>
 </tr>
 </tbody></table>
-<h2 id='trades'>Trades</h2>
-<p>You can pull individual trades on a per exchange/per pair basis. Historical trades are available for up to an hour at a time using the <code>startDate</code> and <code>endDate</code> parameters.</p>
 
+<p>You can use the query parameters to filter by exchange or pair. This is useful when trying to determine which exchanges support a given pair, or you&#39;re interested in finding the supported symbols for a particular exchange.
+In that case, you&#39;d swap out the supportedExchanges line in the sample request to the right with this:</p>
+
+<p><code>supportedExchanges(dadExchangeId: &quot;Coinbase&quot;) ...</code></p>
+
+<p>The same concept applies when filtering by pair, like this:</p>
+
+<p><code>supportedExchanges(forPair: &quot;BTC/USD&quot;) ...</code></p>
+
+<aside class="notice">
+When filtering by pair, every supported pair for each exchange will be returned, however only exchanges that support the specific pair you entered will be returned.
+</aside>
+<h2 id='trades'>Trades</h2>
 <blockquote>
 <p>Sample request:</p>
 </blockquote>
@@ -386,7 +447,6 @@ You will need both a public and private key to authenticate.
     }
   }
 }
-
 </code></pre>
 <blockquote>
 <p>Sample response:</p>
@@ -413,8 +473,9 @@ You will need both a public and private key to authenticate.
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
-</span></code></pre><h3 id='query-parameters'>Query Parameters</h3>
+</span></code></pre>
+<p>You can pull individual trades on a per exchange/per pair basis. Historical trades are available for up to an hour at a time using the <code>startDate</code> and <code>endDate</code> parameters. You can use the parameters to cycle through historical trades and pull as much history as Digital Assets Data supports.</p>
+<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -438,13 +499,13 @@ You will need both a public and private key to authenticate.
 <tr>
 <td>startDate</td>
 <td>No</td>
-<td>{10 minutes ago}</td>
+<td>10 minutes ago</td>
 <td>Can&#39;t be more than 1 hour apart from endDate</td>
 </tr>
 <tr>
 <td>endDate</td>
 <td>No</td>
-<td>{Now}</td>
+<td>Now</td>
 <td>Can&#39;t be more than 1 hour apart from startDate</td>
 </tr>
 <tr>
@@ -461,11 +522,9 @@ You will need both a public and private key to authenticate.
 </tr>
 </tbody></table>
 
-<p>The Trade ID parameters are recommended for filling in missing records, not for general use. They will not work for exchanges that use string IDs instead of numeric IDs.</p>
-
-<p>If dates are not specified, the endpoint will return all trades within the previous 10 minutes by default.</p>
-
-<p>Dates must be formatted like <code>2020-01-10T17:49:26Z</code></p>
+<p>The Trade ID parameters are recommended for filling in missing records, not for general use. They will not work for exchanges that use IDs formatted as strings instead of integers.
+If dates are not specified, the endpoint will return all trades within the previous 10 minutes by default.
+Dates must be formatted per the ISO 8601 standard (e.g.: <code>2020-01-10T17:49:26Z</code>)</p>
 
 <aside class="notice">
 The max distance between startDate and endDate is 1 hour.
@@ -477,15 +536,15 @@ The max distance between startDate and endDate is 1 hour.
 <h2 id='order-book-streams'>Order Book Streams</h2>
 <p>Coming soon...</p>
 <h1 id='websockets'>Websockets</h1>
-<p>To connect to websockets, you will need your public and private key.</p>
-
-<p>A sample URL is shown below.</p>
+<p>To connect to websockets, you will need to include your public and private keys as query parameters.
+A sample URL is shown below.</p>
 
 <p><code>wss://api.digitalassetsdata.com/exchange/coinbase?publicKey={foo}&amp;privateKey={bar}</code></p>
 
 <p>Websockets are currently enabled for each exchange, so you can subscribe to a different websocket by swapping out <code>coinbase</code> for the key of any other supported exchange.</p>
 <h2 id='trades-2'>Trades</h2>
-<p>After connecting to the websocket for a given exchange, you can subscribe to the channel(s) of your choice. We&#39;ve included an example here of a message that would subscribe to the trades channel for BTC/USD.</p>
+<p>After connecting to the websocket for a given exchange, you can subscribe to the channel(s) of your choice. We&#39;ve included an example here of a message that would subscribe to the trades channel for BTC/USD.
+The websocket will push all new trades on an ongoing basis. The websocket will not push historical trades.</p>
 
 <blockquote>
 <p>Sample message:</p>
@@ -495,7 +554,7 @@ The max distance between startDate and endDate is 1 hour.
 <blockquote>
 <p>Sample response:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"trade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.011304879561066628</span><span class="p">,</span><span class="w"> </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">8077.43017578125</span><span class="p">,</span><span class="w"> </span><span class="s2">"dadExchangeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">,</span><span class="w"> </span><span class="s2">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">80911105</span><span class="p">,</span><span class="w"> </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578687219514</span><span class="p">},</span><span class="w"> </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">}</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"trade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.011304879561066628</span><span class="p">,</span><span class="w"> </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">8077.43017578125</span><span class="p">,</span><span class="w"> </span><span class="s2">"dadExchangeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">,</span><span class="w"> </span><span class="s2">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">80911105</span><span class="p">,</span><span class="w"> </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578687219514</span><span class="p">}}</span><span class="w">
 </span></code></pre><h3 id='message-parameters'>Message Parameters</h3>
 <table><thead>
 <tr>
