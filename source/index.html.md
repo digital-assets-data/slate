@@ -17,6 +17,7 @@ Websockets are ideal for ingesting large volumes of data continuously on an ongo
 
 ```python
 import requests
+
 headers = {
   'DAD-PUBLIC-KEY': 'foo',
   'DAD-PRIVATE-KEY': 'bar'
@@ -31,6 +32,7 @@ query = '''
 body = {
   'query': query
 }
+
 response = requests.post(
   'https://api.digitalassetsdata.com/graphql/',
   json=body,

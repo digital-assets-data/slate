@@ -196,8 +196,8 @@
   color: #f92672;
 }
     </style>
-    <link href="stylesheets/screen-07861aab.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print-bccf8c07.css" rel="stylesheet" media="print" />
+    <link href="stylesheets/screen-d575bba3.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-adefdd78.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-c5541673.js"></script>
   </head>
 
@@ -281,6 +281,7 @@ Websockets are ideal for ingesting large volumes of data continuously on an ongo
 <p>Authenticating via request headers:</p>
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'DAD-PUBLIC-KEY'</span><span class="p">:</span> <span class="s">'foo'</span><span class="p">,</span>
   <span class="s">'DAD-PRIVATE-KEY'</span><span class="p">:</span> <span class="s">'bar'</span>
@@ -295,6 +296,7 @@ Websockets are ideal for ingesting large volumes of data continuously on an ongo
 <span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'query'</span><span class="p">:</span> <span class="n">query</span>
 <span class="p">}</span>
+
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
   <span class="s">'https://api.digitalassetsdata.com/graphql/'</span><span class="p">,</span>
   <span class="n">json</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
