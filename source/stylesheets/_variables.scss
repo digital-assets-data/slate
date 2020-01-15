@@ -20,21 +20,37 @@ under the License.
 ////////////////////////////////////////////////////////////////////////////////
 // Use these settings to help adjust the appearance of Slate
 
+:root {
+    --app-background: #E9EDF0;
+    --background-grey: #F3F5F7;
+    --label-grey: #7F8FA4;
+    --grey: #949CAA;
+    --medium-grey: #ABB2BD;
+    --light-grey: #D4DBE0;
+    --light-blue: #4C84FF;
+    --dark-blue: #4D5A72;
+    --blue: #347BC5;
+    --off-red: #D6565B;
+    --green: #4AA84A;
+    --light-green: #78C47A;
+    --orange: #FFB700;
+}
+
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #2E3336 !default;
-$examples-bg: #2E3336 !default;
-$code-bg: #1E2224 !default;
-$code-annotation-bg: #191D1F !default;
-$nav-subitem-bg: #1E2224 !default;
-$nav-active-bg: #0F75D4 !default;
-$nav-active-parent-bg: #1E2224 !default; // parent links of the current section
+$nav-bg: var(--background-grey);
+$examples-bg: var(--app-background);
+$code-bg: #404040;
+$code-annotation-bg: #949CAA;
+$nav-subitem-bg: var(--app-background);
+$nav-active-bg: #347BC5;
+$nav-active-parent-bg: var(--dark-blue); // parent links of the current section
 $lang-select-border: #000 !default;
 $lang-select-bg: #1E2224 !default;
 $lang-select-active-bg: $examples-bg !default; // feel free to change this to blue or something
 $lang-select-pressed-bg: #111 !default; // color of language tab bg when mouse is pressed
-$main-bg: #F3F7F9 !default;
+$main-bg: #FBFDFC;
 $aside-notice-bg: #8fbcd4 !default;
 $aside-warning-bg: #c97a7e !default;
 $aside-success-bg: #6ac174 !default;
@@ -44,8 +60,8 @@ $search-notice-bg: #c97a7e !default;
 // TEXT COLORS
 ////////////////////
 $main-text: #333 !default; // main content text color
-$nav-text: #fff !default;
-$nav-active-text: #fff !default;
+$nav-text: var(--dark-blue);
+$nav-active-text: #fff;
 $nav-active-parent-text: #fff !default; // parent links of the current section
 $lang-select-text: #fff !default; // color of unselected language tab text
 $lang-select-active-text: #fff !default; // color of selected language tab text
