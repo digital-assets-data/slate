@@ -6,10 +6,14 @@ search: true
 ---
 # Introduction
 Welcome to the Digital Assets Data API documentation. This documentation provides detailed instructions for leveraging the DAD API. If you are looking to consume our market data outside of the platform, you have come to the right place.
+
 If you need assistance consuming data from our APIs after reviewing this documentation, please reach out to us at <a href="mailto:support@digitalassetsdata.com" target="_blank">support@digitalassetsdata.com</a>.
+
 We currently support two methods for retrieving data:
+
 1. Batch requests (pull) through GraphQL
 2. Continuous feeds (push) via websockets
+
 Websockets are ideal for ingesting large volumes of data continuously on an ongoing basis. If you're looking to pull a specific subset of data, especially historical data, then you should use the GraphQL endpoints.
 
 # Authentication
