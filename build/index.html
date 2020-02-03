@@ -239,6 +239,15 @@
                   <li>
                     <a href="#order-book-streams" class="toc-h2 toc-link" data-title="Order Book Streams">Order Book Streams</a>
                   </li>
+                  <li>
+                    <a href="#supported-blockchains" class="toc-h2 toc-link" data-title="Supported Blockchains">Supported Blockchains</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-blocks" class="toc-h2 toc-link" data-title="Blockchain Blocks">Blockchain Blocks</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-transactions" class="toc-h2 toc-link" data-title="Blockchain Transactions">Blockchain Transactions</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -283,9 +292,13 @@
 
 <p>Websockets are ideal for ingesting large volumes of data continuously on an ongoing basis. If you&#39;re looking to pull a specific subset of data, especially historical data, then you should use the GraphQL endpoints.</p>
 <h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>Authenticating via request headers:</p>
-</blockquote>
+<p>You will need to authenticate in order to access either the GraphQL endpoints or the websockets using public and private keys. You can retrieve your public key and generate a private key <a href="https://app.digitalassetsdata.com/access-keys" target="_blank">here</a>.</p>
+
+<p>For websockets, you will need to include your public and private keys as query parameters. That will look like this:</p>
+
+<p><code>wss://api.digitalassetsdata.com/exchange/coinbase?publicKey={foo}&amp;privateKey={bar}</code></p>
+
+<p>For GraphQL, the public and private keys will need to be included in the request headers. A sample code snippet for Python is shown to the right.</p>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
@@ -309,24 +322,6 @@
   <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
 <span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </code></pre>
-<blockquote>
-<p>Authenticating via graphql arguments:</p>
-</blockquote>
-<pre class="highlight plaintext"><code>{
-    apiViewer(publicKey: "foo" privateKey: "bar") {
-        username
-    }
-}
-</code></pre>
-<p>You will need to authenticate in order to access either the GraphQL endpoints or the websockets using public and private keys. You can retrieve your public key and generate a private key <a href="https://app.digitalassetsdata.com/access-keys" target="_blank">here</a>.
-For websockets, you will need to include your public and private keys as query parameters. That will look like this:</p>
-
-<p><code>wss://api.digitalassetsdata.com/exchange/coinbase?publicKey={foo}&amp;privateKey={bar}</code></p>
-
-<p>For GraphQL requests, the public and private keys will need to be included in the request headers. A sample code snippet for Python is shown to the right.</p>
-
-<p>If you&#39;re using the <a href="https://api.digitalassetsdata.com/graphql/">GraphQL Explorer</a> you can include your keys as arguments to <code>apiViewer</code></p>
-
 <p>Make sure to replace <code>foo</code> and <code>bar</code> with your public and private key, respectively. Your public key will never change, and if you lose your private key you can generate a new one anytime.</p>
 
 <aside class="notice">
@@ -334,14 +329,14 @@ You will need both a public and private key to authenticate.
 </aside>
 <h1 id='graphql'>GraphQL</h1>
 <p>GraphQL is a more flexible alternative to the traditional REST framework. If you are new to GraphQL, we recommend engaging with the introduction materials on their <a href="https://graphql.org/learn/" target="_blank">website</a>.
-If you are already comfortable with GraphQL you can review additional documentation and test your connection and your queries using our <a href="https://api.digitalassetsdata.com/graphql/">GraphQL Explorer</a>.</p>
+If you are already comfortable with GraphQL you can review additional documentation and test your connection and your queries using our <a href="/graphql-explorer" target="_blank">GraphQL Explorer</a>.</p>
 
 <blockquote>
 <p>Sample connection test:</p>
 </blockquote>
 <pre class="highlight plaintext"><code>{ 
     apiViewer(publicKey:"foo" privateKey:"bar") {
-        username
+    username
   }
 }
 </code></pre>
@@ -356,9 +351,48 @@ If you are already comfortable with GraphQL you can review additional documentat
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>You can test your connection by opening the GraphQL explorer and copying the code snippet to the right into the query editor in the left panel, swapping in your public and private keys, and then pressing the <code>play</code> button in the header. If the connection was successful, your username will be returned. If the connection was unsuccessful, you will get an error message. If that&#39;s the case, double check that you&#39;ve entered your API keys correctly.
-While GraphQL provides a flexible query language for interacting with our APIs that will enable you to pull exactly what you need (and no more), we have documented the most common use cases with code snippets and example responses below. Feel free to test these code snippets yourself in the GraphQL Explorer.</p>
+<p>You can test your connection by opening the GraphQL explorer and copying the code snippet to the right into the query editor in the left panel, swapping in your public and private keys, and then pressing the <code>play</code> button in the header. If the connection was successful, your username will be returned. If the connection was unsuccessful, you will get an error message. If that&#39;s the case, double check that you&#39;ve entered your API keys correctly.</p>
+
+<p>While GraphQL provides a flexible query language for interacting with our APIs that will enable you to pull exactly what you need (and no more), we have documented the most common use cases with code snippets and example responses below. Feel free to test these code snippets yourself in the GraphQL Explorer.</p>
 <h2 id='supported-exchanges-pairs'>Supported Exchanges / Pairs</h2>
+<p>You can use the supported exchanges endpoint to determine which exchanges and pairs are currently supported through the API.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>forPair</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized pair/symbol</td>
+</tr>
+<tr>
+<td>dadExchangeId</td>
+<td>No</td>
+<td>N/A</td>
+<td>The DAD exchange key</td>
+</tr>
+</tbody></table>
+
+<p>You can use the query parameters to filter by exchange or pair. This is useful when trying to determine which exchanges support a given pair, or you&#39;re interested in finding the supported symbols for a particular exchange.</p>
+
+<p>In that case, you&#39;d swap out the supportedExchanges line in the sample request to the right with this:</p>
+
+<p><code>supportedExchanges (dadExchangeId: &quot;Coinbase&quot;) {</code></p>
+
+<p>The same concept applies when filtering by pair, like this:</p>
+
+<p><code>supportedExchanges (forPair: &quot;BTC/USD&quot;) {</code></p>
+
+<aside class="notice">
+When filtering by pair, every supported pair for each exchange will be returned, however only exchanges that support the specific pair you entered will be returned.
+</aside>
+
 <blockquote>
 <p>Sample request:</p>
 </blockquote>
@@ -370,6 +404,7 @@ While GraphQL provides a flexible query language for interacting with our APIs t
     }
   }
 }
+
 </code></pre>
 <blockquote>
 <p>Sample response:</p>
@@ -396,51 +431,17 @@ While GraphQL provides a flexible query language for interacting with our APIs t
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>You can use the supported exchanges endpoint to determine which exchanges and pairs are currently supported through the API.</p>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>forPair</td>
-<td>No</td>
-<td>N/A</td>
-<td>The standardized pair/symbol</td>
-</tr>
-<tr>
-<td>dadExchangeId</td>
-<td>No</td>
-<td>N/A</td>
-<td>The DAD exchange key</td>
-</tr>
-</tbody></table>
+</span></code></pre><h2 id='trades'>Trades</h2>
+<p>You can pull individual trades on a per exchange/per pair basis. Historical trades are available for up to an hour at a time using the <code>startDate</code> and <code>endDate</code> parameters. You can use the parameters to cycle through historical trades and pull as much history as Digital Assets Data supports.</p>
 
-<p>You can use the query parameters to filter by exchange or pair. This is useful when trying to determine which exchanges support a given pair, or you&#39;re interested in finding the supported symbols for a particular exchange.
-In that case, you&#39;d swap out the supportedExchanges line in the sample request to the right with this:</p>
-
-<p><code>supportedExchanges(dadExchangeId: &quot;Coinbase&quot;) ...</code></p>
-
-<p>The same concept applies when filtering by pair, like this:</p>
-
-<p><code>supportedExchanges(forPair: &quot;BTC/USD&quot;) ...</code></p>
-
-<aside class="notice">
-When filtering by pair, every supported pair for each exchange will be returned, however only exchanges that support the specific pair you entered will be returned.
-</aside>
-<h2 id='trades'>Trades</h2>
 <blockquote>
 <p>Sample request:</p>
 </blockquote>
 <pre class="highlight plaintext"><code>{ 
     apiViewer(publicKey:"foo" privateKey:"bar") {
     exchange(dadExchangeId:"coinbase") {
-      trades(pair:"BTC/USD") {
+      trades(pair:"BTC/USD", first: 1) {
         edges {
           node {
             id
@@ -455,6 +456,7 @@ When filtering by pair, every supported pair for each exchange will be returned,
     }
   }
 }
+
 </code></pre>
 <blockquote>
 <p>Sample response:</p>
@@ -481,9 +483,8 @@ When filtering by pair, every supported pair for each exchange will be returned,
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>You can pull individual trades on a per exchange/per pair basis. Historical trades are available for up to an hour at a time using the <code>startDate</code> and <code>endDate</code> parameters. You can use the parameters to cycle through historical trades and pull as much history as Digital Assets Data supports.</p>
-<h3 id='query-parameters'>Query Parameters</h3>
+
+</span></code></pre><h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -530,29 +531,439 @@ When filtering by pair, every supported pair for each exchange will be returned,
 </tr>
 </tbody></table>
 
-<p>The Trade ID parameters are recommended for filling in missing records, not for general use. They will not work for exchanges that use IDs formatted as strings instead of integers.
-If dates are not specified, the endpoint will return all trades within the previous 10 minutes by default.
-Dates must be formatted per the ISO 8601 standard (e.g.: <code>2020-01-10T17:49:26Z</code>)</p>
+<p>The Trade ID parameters are recommended for filling in missing records, not for general use. They will not work for exchanges that use IDs formatted as strings instead of integers.</p>
+
+<p>If dates are not specified, the endpoint will return all trades within the previous 10 minutes by default.
+<br><br>
+Dates must be formatted per the ISO 8601 standard (e.g.: 2020-01-10T17:49:26Z)
+<br><br>
+<aside class="notice">
+The record limit for the trades endpoint is 100,000
+</aside></p>
+<h2 id='prices-candles'>Prices / Candles</h2>
+<p>You can use this endpoint to pull individual blocks for a given blockchain back to the genesis block.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    prices(dadExchangeId: "coinbase", pair: "BTC/USD", windowType: "tumble_01h", first: 1) {
+      edges {
+        node {
+          periodStart
+          periodEnd
+          marketplace
+          pair
+          open
+          high
+          low
+          close
+          volume
+          quoteVolume
+          tradeCount
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"prices"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"periodStart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-31T17:00:00"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"periodEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-31T18:00:00+00:00"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"marketplace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"open"</span><span class="p">:</span><span class="w"> </span><span class="mf">9271.650390625</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"high"</span><span class="p">:</span><span class="w"> </span><span class="mf">9297.08984375</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"low"</span><span class="p">:</span><span class="w"> </span><span class="mi">9260</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"close"</span><span class="p">:</span><span class="w"> </span><span class="mi">9262</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">448.23468017578125</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"quoteVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">4157213.5</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"tradeCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2497</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dadExchangeId</td>
+<td>No</td>
+<td>N/A</td>
+<td>The DAD exchange key, e.g. <code>coinbase</code></td>
+</tr>
+<tr>
+<td>pair</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The standardized pair/symbol, e.g. <code>BTC/USD</code></td>
+</tr>
+<tr>
+<td>windowType</td>
+<td>Yes</td>
+<td><code>tumble_01m</code></td>
+<td>The granularity and methodology of the price</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h3 id='window-types'>Window Types</h3>
+<p>The window type must be specified in order to retrieve prices from the API. The window type determines the methodology, granularity, and update frequency of the prices.
+<br><br>
+&quot;Tumble&quot; indicates that the price includes all trades from a given window (e.g. 1 minute), and then the next price includes all trades from the following window with no overlap. Each price is thus completely distinct.
+<br><br>
+&quot;Sliding&quot; means that there&#39;s overlap in the prices. For example, <code>sliding_05m_01m</code> indicates that the prices include trades over the previous 5 minutes, but the price is updated/calculated every minute. Thus, there&#39;s a smoothing effect on the prices as trades are included in multiple windows.
+<br><br>
+The default is <code>tumble_01m</code>, but a list of options is provided below. This list may be expanded in the future.</p>
+
+<table><thead>
+<tr>
+<th>Window Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>tumble_01s</code></td>
+<td>Secondly prices</td>
+</tr>
+<tr>
+<td><code>tumble_05s</code></td>
+<td>5 secondly prices</td>
+</tr>
+<tr>
+<td><code>tumble_01m</code></td>
+<td>Minutely prices</td>
+</tr>
+<tr>
+<td><code>tumble_05m</code></td>
+<td>5 minutely prices</td>
+</tr>
+<tr>
+<td><code>tumble_15m</code></td>
+<td>15 minutely prices</td>
+</tr>
+<tr>
+<td><code>tumble_01h</code></td>
+<td>Hourly prices</td>
+</tr>
+<tr>
+<td><code>tumble_04h</code></td>
+<td>4 hourly prices</td>
+</tr>
+<tr>
+<td><code>sliding_05m_01m</code></td>
+<td>5 minutely prices updated every minute</td>
+</tr>
+<tr>
+<td><code>sliding_15m_01m</code></td>
+<td>15 minutely prices updated every minute</td>
+</tr>
+<tr>
+<td><code>sliding_01h_01m</code></td>
+<td>Hourly prices updated every minute</td>
+</tr>
+<tr>
+<td><code>sliding_04h_01h</code></td>
+<td>4 hourly prices updated every hour</td>
+</tr>
+</tbody></table>
 
 <aside class="notice">
-The max distance between startDate and endDate is 1 hour.
+The record limit for the blocks endpoint is 10,000
 </aside>
-<h2 id='prices-candles'>Prices / Candles</h2>
-<p>Coming soon...</p>
 <h2 id='order-book-snapshots'>Order Book Snapshots</h2>
 <p>Coming soon...</p>
 <h2 id='order-book-streams'>Order Book Streams</h2>
 <p>Coming soon...</p>
+<h2 id='supported-blockchains'>Supported Blockchains</h2>
+<p>You can use the supported blockchains endpoint to discover which blockchains are currently supported through this API. In the future, this endpoint will be expanded to also include the datasets for each blockchain. This will be particularly relevant for blockchains that weren&#39;t forked from BTC that have a different data schema or different datasets available (e.g. event logs for Ethereum).</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    supportedBlockchains {
+      dadBlockchainId
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"supportedBlockchains"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ltc"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dash"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zec"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zen"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h2 id='blockchain-blocks'>Blockchain Blocks</h2>
+<p>You can use this endpoint to pull individual blocks for a given blockchain back to the genesis block.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      blocks(first: 1) {
+        edges {
+          node {
+            timestamp
+            blockHeight
+            blockHash
+            blockSize
+            blockReward
+            difficulty
+            transactionCount
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-30T17:48:54"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"blockHeight"</span><span class="p">:</span><span class="w"> </span><span class="mi">615247</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"blockHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000000000000001725096df09c4dee4970e4cf0f59c574572209c967b90"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"blockSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">941855</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"blockReward"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"difficulty"</span><span class="p">:</span><span class="w"> </span><span class="mi">15466098589696</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"transactionCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2635</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>blockHeight</td>
+<td>No</td>
+<td>N/A</td>
+<td>The block height, aka block number</td>
+</tr>
+<tr>
+<td>blockHash</td>
+<td>No</td>
+<td>N/A</td>
+<td>The block ID</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>24 hours ago</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The record limit for the blocks endpoint is 10,000
+</aside>
+<h2 id='blockchain-transactions'>Blockchain Transactions</h2>
+<p>You can use this endpoint to pull individual transactions for a given blockchain back to the genesis block.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      transactions(first: 1) {
+        edges {
+          node {
+            timestamp
+            transactionHash
+            blockHeight
+            transactionIndex
+            outputVolume
+            feeVolume
+            isCoinbase
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-31T19:44:39"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"transactionHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"697dd0932db6bc470db8bedf578ca962afa977cf1607b3f0965acd5b0a4258e3"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"blockHeight"</span><span class="p">:</span><span class="w"> </span><span class="mi">615396</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"transactionIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">379</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"outputVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2200581431388855</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"feeVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00010469999688211828</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"isCoinbase"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>blockHeight</td>
+<td>No</td>
+<td>24 hours ago</td>
+<td>The block number</td>
+</tr>
+<tr>
+<td>transactionHash</td>
+<td>No</td>
+<td>Now</td>
+<td>The transaction ID</td>
+</tr>
+<tr>
+<td>blockHash</td>
+<td>No</td>
+<td>N/A</td>
+<td>The block ID</td>
+</tr>
+<tr>
+<td>isCoinbase</td>
+<td>No</td>
+<td>24 hours ago</td>
+<td>Boolean for coinbase transactions</td>
+</tr>
+<tr>
+<td>outputVolumeMin</td>
+<td>No</td>
+<td>Now</td>
+<td>Minimum transaction size</td>
+</tr>
+<tr>
+<td>outputVolumeMax</td>
+<td>No</td>
+<td>Now</td>
+<td>Maximum transaction size</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The record limit for the transactions endpoint is 100,000
+</aside>
 <h1 id='websockets'>Websockets</h1>
-<p>To connect to websockets, you will need to include your public and private keys as query parameters.
-A sample URL is shown below.</p>
+<p>To connect to websockets, you will need to include your public and private keys as query parameters.</p>
+
+<p>A sample URL is shown below.</p>
 
 <p><code>wss://api.digitalassetsdata.com/exchange/coinbase?publicKey={foo}&amp;privateKey={bar}</code></p>
 
 <p>Websockets are currently enabled for each exchange, so you can subscribe to a different websocket by swapping out <code>coinbase</code> for the key of any other supported exchange.</p>
 <h2 id='trades-2'>Trades</h2>
-<p>After connecting to the websocket for a given exchange, you can subscribe to the channel(s) of your choice. We&#39;ve included an example here of a message that would subscribe to the trades channel for BTC/USD.
-The websocket will push all new trades on an ongoing basis. The websocket will not push historical trades.</p>
+<p>After connecting to the websocket for a given exchange, you can subscribe to the channel(s) of your choice. We&#39;ve included an example here of a message that would subscribe to the trades channel for BTC/USD.</p>
+
+<p>The websocket will push all new trades on an ongoing basis. The websocket will not push historical trades.</p>
 
 <blockquote>
 <p>Sample message:</p>
