@@ -59,7 +59,7 @@ You will need both a public and private key to authenticate.
 
 # GraphQL
 GraphQL is a more flexible alternative to the traditional REST framework. If you are new to GraphQL, we recommend engaging with the introduction materials on their <a href="https://graphql.org/learn/" target="_blank">website</a>.
-If you are already comfortable with GraphQL you can review additional documentation and test your connection and your queries using our <a href="/graphql-explorer" target="_blank">GraphQL Explorer</a>.
+If you are already comfortable with GraphQL you can review additional documentation and test your connection and your queries using our <a href="/schema-explorer" target="_blank">GraphQL Explorer</a>.
 
 > Sample connection test:
 
