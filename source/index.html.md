@@ -312,7 +312,6 @@ The default is `tumble_01m`, but a list of options is provided below. This list 
 
 Window Type | Description 
 --------- | -------
-`tumble_01s` | Secondly prices
 `tumble_05s` | 5 secondly prices
 `tumble_01m` | Minutely prices
 `tumble_05m` | 5 minutely prices
@@ -325,7 +324,7 @@ Window Type | Description
 `sliding_04h_01h` | 4 hourly prices updated every hour
 
 <aside class="notice">
-The record limit for the blocks endpoint is 10,000
+The record limit for the prices endpoint is 100,000
 </aside>
 
 ## Order Book Snapshots
