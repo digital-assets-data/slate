@@ -539,9 +539,11 @@ Websockets are currently enabled for each exchange, so you can subscribe to a di
 
 ## Trades
 
-After connecting to the websocket for a given exchange, you can subscribe to the channel(s) of your choice. We've included an example here of a message that would subscribe to the trades channel for BTC/USD.
+Trades can be pushed to you through the `exchange` websocket endpoint. That can be accessed from URLs formatted like this:
 
-The websocket will push all new trades on an ongoing basis. The websocket will not push historical trades.
+`wss://api.digitalassetsdata.com/exchange/coinbase?publicKey={foo}&privateKey={bar}`
+
+We've included an example here of a message that would subscribe to the trades channel for BTC/USD.
 
 >Sample message:
 
@@ -555,6 +557,8 @@ The websocket will push all new trades on an ongoing basis. The websocket will n
 {"trade": {"volume": 0.011304879561066628, "price": 8077.43017578125, "dadExchangeId": "coinbase", "pair": "BTC/USD", "tradeId": 80911105, "timestamp": 1578687219514}}
 ```
 
+The websocket will push all new trades on an ongoing basis. The websocket will not push historical trades.
+
 ### Message Parameters
 Parameter | Required | Default | Description
 --------- | ------- | -------- | -----------
@@ -563,7 +567,48 @@ channels | Yes | trades |
 pair | Yes | BTC/USD | The standardized pair/symbol
 
 ## Prices / Candles
-Coming soon...
+
+Prices can be pushed to you through the `prices` websocket endpoint. That can be accessed from this URL:
+
+`wss://api.digitalassetsdata.com/prices?publicKey={foo}&privateKey={bar}`
+
+We've included an example here of a message that would subscribe to 5 secondly prices for BTC/USD on Coinbase.
+
+>Sample message:
+
+```json
+{"action": "subscribe", "exchanges": ["coinbase"], "pairs": ["BTC/USD"], "windows": ["tumble_05s"]}
+```
+
+> Sample response:
+
+```json
+{"volume": 9.2951021194458, "price": 9360.0, "pair": "BTC/USD", "timestamp": 1582673495000, "dadExchangeId": "UNIFIED", "windowType": "tumble_05s", "periodStart": 1582673495000, "periodEnd": 1582673500000, "open": 9359.23046875, "high": 9361.873046875, "low": 9358.7900390625, "close": 9361.07421875, "quoteVolume": 87002.1484375, "tradeCount": 118, "exchangeCount": 1}
+```
+
+The websocket will push all newly generated prices that match your parameters on an ongoing basis, and may push a limited amount of historical prices on subscription.
+
+### Message Parameters
+
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+action | Yes | N/A | ping or subscribe  
+pairs | Yes | BTC/USD | List of standardized pairs/symbols
+exchanges | No | UNIFIED | List of exchanges
+windows | No | tumble_05s | List of desired price windows/methodologies
+
+Window Type | Description 
+--------- | -------
+`tumble_05s` | 5 secondly prices
+`tumble_01m` | Minutely prices
+`tumble_05m` | 5 minutely prices
+`tumble_15m` | 15 minutely prices
+`tumble_01h` | Hourly prices
+`tumble_04h` | 4 hourly prices
+`sliding_05m_01m` | 5 minutely prices updated every minute
+`sliding_15m_01m` | 15 minutely prices updated every minute
+`sliding_01h_01m` | Hourly prices updated every minute
+`sliding_04h_01h` | 4 hourly prices updated every hour
 
 ## Order Book Snapshots
 Coming soon...
