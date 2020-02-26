@@ -231,8 +231,7 @@ The record limit for the trades endpoint is 100,000
 
 ## Prices / Candles
 
-You can use this endpoint to pull individual blocks for a given blockchain back to the genesis block.
-
+Historical prices and OHLCV data are available through this endpoint. You can specify the exchange, pairs, and granularity of the prices.
 > Sample request:
 
 ```graphql
@@ -583,7 +582,7 @@ We've included an example here of a message that would subscribe to 5 secondly p
 > Sample response:
 
 ```json
-{"volume": 9.2951021194458, "price": 9360.0, "pair": "BTC/USD", "timestamp": 1582673495000, "dadExchangeId": "UNIFIED", "windowType": "tumble_05s", "periodStart": 1582673495000, "periodEnd": 1582673500000, "open": 9359.23046875, "high": 9361.873046875, "low": 9358.7900390625, "close": 9361.07421875, "quoteVolume": 87002.1484375, "tradeCount": 118, "exchangeCount": 1}
+{"volume": 9.2951021194458, "price": 9360.0, "pair": "BTC/USD", "timestamp": 1582673495000, "dadExchangeId": "UNIFIED", "windowType": "tumble_05s", "periodStart": 1582673495000, "periodEnd": 1582673500000, "open": 9359.23046875, "high": 9361.873046875, "low": 9358.7900390625, "close": 9361.07421875, "quoteVolume": 87002.1484375, "tradeCount": 118}
 ```
 
 The websocket will push all newly generated prices that match your parameters on an ongoing basis, and may push a limited amount of historical prices on subscription.
