@@ -326,14 +326,6 @@ Window Type | Description
 The record limit for the prices endpoint is 100,000
 </aside>
 
-## Order Book Snapshots
-
-Coming soon...
-
-## Order Book Streams
-
-Coming soon...
-
 ## Supported Blockchains
 
 You can use the supported blockchains endpoint to discover which blockchains are currently supported through this API. In the future, this endpoint will be expanded to also include the datasets for each blockchain. This will be particularly relevant for blockchains that weren't forked from BTC that have a different data schema or different datasets available (e.g. event logs for Ethereum).
@@ -526,6 +518,219 @@ outputVolumeMax | No | Now | Maximum transaction size
 The record limit for the transactions endpoint is 100,000
 </aside>
 
+## Blockchain UTXO Age Bands
+
+You can use this endpoint to pull daily UTXO age band data based on Digital Assets Data's default age bands. The `reportDate` corresponds to the date in the blockchain's history and `ageBandPercent` shows the percentage of UTXO volume within the relevant age band. 
+
+> Sample request:
+
+```graphql
+{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      utxoDailyAgeBands (first:1) {
+        edges {
+          node {
+            id
+            projectId
+            assetId
+            reportDate
+            ageBand
+            ageBandVolume
+            ageBandPercent
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+> Sample response:
+
+```json
+{
+  "data": {
+    "apiViewer": {
+      "blockchain": {
+        "utxoDailyAgeBands": {
+          "edges": [
+            {
+              "node": {
+                "id": "utxo_daily_age_bands__Bitcoin_BTC_BTC__1583798400000",
+                "projectId": "Bitcoin_BTC",
+                "assetId": "Bitcoin_BTC_BTC",
+                "reportDate": "2020-03-10T00:00:00",
+                "ageBand": "18-24m",
+                "ageBandVolume": 30589.00795745,
+                "ageBandPercent": 0.006703168568080371
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+### Query Parameters
+
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+startTime | No | N/A | ISO 8601 standard date |
+endTime | No | N/A | ISO 8601 standard date |
+
+### Age Bands
+
+The default age bands used by Digital Assets Data are listed below.
+
+Age Band | Description 
+--------- | -------
+`<1d` | Less than 24 hours
+`1d-1w` | 1 day to 1 week
+`1w-1m` | 1 week to 1 month
+`1-3m` | 1 to 3 months
+`3-6m` | 3 to 6 months
+`6-12m` | 6 to 12 months
+`12-18m` | 12 to 18 months
+`18-24m` | 18 to 24 months
+`2-3y` | 2 to 3 years
+`3-5y` | 3 to 5 years
+`>5y` | More than 5 years
+
+## Blockchain UTXO Summaries
+
+You can use this endpoint to pull the daily UTXO summaries underlying our age band data. This data could be used to calculate custom age bands.
+
+The `reportTime` corresponds to the date in the blockchain's history, and `utxoCreatedTime` corresponds to the date the UTXOs were created. `utxoVolume` and `utxoCount` show the number of distinct UTXOs and their volume that were created on that date.
+
+> Sample request:
+
+```graphql
+{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      utxoDailySummary (first:1) {
+        edges {
+          node {
+            id
+            projectId
+            assetId
+            reportTime
+            utxoCreatedTime
+            utxoCreatedEpochTime
+            utxoVolume
+            utxoCount
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+> Sample response:
+
+```json
+{
+  "data": {
+    "apiViewer": {
+      "blockchain": {
+        "utxoDailySummary": {
+          "edges": [
+            {
+              "node": {
+                "id": "utxo_daily_summary__Bitcoin_BTC_BTC__1583884800000__1583798400000",
+                "projectId": "Bitcoin_BTC",
+                "assetId": "Bitcoin_BTC_BTC",
+                "reportTime": "2020-03-11T00:00:00",
+                "utxoCreatedTime": "2020-03-10T00:00:00",
+                "utxoCreatedEpochTime": 1583798400000,
+                "utxoVolume": 229861.19601658,
+                "utxoCount": 384951
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+```
+
+### Query Parameters
+
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+startTime | No | N/A | ISO 8601 standard date |
+endTime | No | N/A | ISO 8601 standard date |
+
+
+## Blockchain Daily Active Addresses
+
+You can use this endpoint to pull individual transactions for a given blockchain back to the genesis block.
+
+> Sample request:
+
+```graphql
+{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      addressSummary (first:1) {
+        edges {
+          node {
+            id
+            activeAddresses
+            newAddresses
+            totalAddressCount
+            assetId
+            projectId
+            timestamp
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+> Sample response:
+
+```json
+{
+  "data": {
+    "apiViewer": {
+      "blockchain": {
+        "addressSummary": {
+          "edges": [
+            {
+              "node": {
+                "id": "daily_address_summary__1583798400000__Bitcoin_BTC_BTC",
+                "activeAddresses": 826647,
+                "newAddresses": 429371,
+                "totalAddressCount": 636211263,
+                "assetId": "Bitcoin_BTC_BTC",
+                "projectId": "Bitcoin_BTC",
+                "timestamp": "2020-03-10T00:00:00"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+### Query Parameters
+
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+startTime | No | N/A | ISO 8601 standard date |
+endTime | No | N/A | ISO 8601 standard date |
+
 # Websockets
 
 To connect to websockets, you will need to include your public and private keys as query parameters.
@@ -608,12 +813,6 @@ Window Type | Description
 `sliding_15m_01m` | 15 minutely prices updated every minute
 `sliding_01h_01m` | Hourly prices updated every minute
 `sliding_04h_01h` | 4 hourly prices updated every hour
-
-## Order Book Snapshots
-Coming soon...
-
-## Order Book Streams
-Coming soon...
 
 # Errors
 The Digital Assets Data API uses the following error codes:
