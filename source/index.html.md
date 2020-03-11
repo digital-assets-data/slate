@@ -670,7 +670,7 @@ endTime | No | N/A | ISO 8601 standard date |
 
 ## Blockchain Daily Active Addresses
 
-You can use this endpoint to pull individual transactions for a given blockchain back to the genesis block.
+You can use this endpoint to pull daily stats on the number of active addresses for UTXO-based chains.
 
 > Sample request:
 
