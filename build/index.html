@@ -234,12 +234,6 @@
                     <a href="#prices-candles" class="toc-h2 toc-link" data-title="Prices / Candles">Prices / Candles</a>
                   </li>
                   <li>
-                    <a href="#order-book-snapshots" class="toc-h2 toc-link" data-title="Order Book Snapshots">Order Book Snapshots</a>
-                  </li>
-                  <li>
-                    <a href="#order-book-streams" class="toc-h2 toc-link" data-title="Order Book Streams">Order Book Streams</a>
-                  </li>
-                  <li>
                     <a href="#supported-blockchains" class="toc-h2 toc-link" data-title="Supported Blockchains">Supported Blockchains</a>
                   </li>
                   <li>
@@ -247,6 +241,15 @@
                   </li>
                   <li>
                     <a href="#blockchain-transactions" class="toc-h2 toc-link" data-title="Blockchain Transactions">Blockchain Transactions</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-utxo-age-bands" class="toc-h2 toc-link" data-title="Blockchain UTXO Age Bands">Blockchain UTXO Age Bands</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-utxo-summaries" class="toc-h2 toc-link" data-title="Blockchain UTXO Summaries">Blockchain UTXO Summaries</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-daily-active-addresses" class="toc-h2 toc-link" data-title="Blockchain Daily Active Addresses">Blockchain Daily Active Addresses</a>
                   </li>
               </ul>
           </li>
@@ -258,12 +261,6 @@
                   </li>
                   <li>
                     <a href="#prices-candles-2" class="toc-h2 toc-link" data-title="Prices / Candles">Prices / Candles</a>
-                  </li>
-                  <li>
-                    <a href="#order-book-snapshots-2" class="toc-h2 toc-link" data-title="Order Book Snapshots">Order Book Snapshots</a>
-                  </li>
-                  <li>
-                    <a href="#order-book-streams-2" class="toc-h2 toc-link" data-title="Order Book Streams">Order Book Streams</a>
                   </li>
               </ul>
           </li>
@@ -697,10 +694,6 @@ The default is <code>tumble_01m</code>, but a list of options is provided below.
 <aside class="notice">
 The record limit for the prices endpoint is 100,000
 </aside>
-<h2 id='order-book-snapshots'>Order Book Snapshots</h2>
-<p>Coming soon...</p>
-<h2 id='order-book-streams'>Order Book Streams</h2>
-<p>Coming soon...</p>
 <h2 id='supported-blockchains'>Supported Blockchains</h2>
 <p>You can use the supported blockchains endpoint to discover which blockchains are currently supported through this API. In the future, this endpoint will be expanded to also include the datasets for each blockchain. This will be particularly relevant for blockchains that weren&#39;t forked from BTC that have a different data schema or different datasets available (e.g. event logs for Ethereum).</p>
 
@@ -948,6 +941,287 @@ The record limit for the blocks endpoint is 10,000
 <aside class="notice">
 The record limit for the transactions endpoint is 100,000
 </aside>
+<h2 id='blockchain-utxo-age-bands'>Blockchain UTXO Age Bands</h2>
+<p>You can use this endpoint to pull daily UTXO age band data based on Digital Assets Data&#39;s default age bands. The <code>reportDate</code> corresponds to the date in the blockchain&#39;s history and <code>ageBandPercent</code> shows the percentage of UTXO volume within the relevant age band. </p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      utxoDailyAgeBands (first:1) {
+        edges {
+          node {
+            id
+            projectId
+            assetId
+            reportDate
+            ageBand
+            ageBandVolume
+            ageBandPercent
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"utxoDailyAgeBands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"utxo_daily_age_bands__Bitcoin_BTC_BTC__1583798400000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"assetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"reportDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-10T00:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"ageBand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18-24m"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"ageBandVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">30589.00795745</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"ageBandPercent"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.006703168568080371</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h3 id='age-bands'>Age Bands</h3>
+<p>The default age bands used by Digital Assets Data are listed below.</p>
+
+<table><thead>
+<tr>
+<th>Age Band</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>&lt;1d</code></td>
+<td>Less than 24 hours</td>
+</tr>
+<tr>
+<td><code>1d-1w</code></td>
+<td>1 day to 1 week</td>
+</tr>
+<tr>
+<td><code>1w-1m</code></td>
+<td>1 week to 1 month</td>
+</tr>
+<tr>
+<td><code>1-3m</code></td>
+<td>1 to 3 months</td>
+</tr>
+<tr>
+<td><code>3-6m</code></td>
+<td>3 to 6 months</td>
+</tr>
+<tr>
+<td><code>6-12m</code></td>
+<td>6 to 12 months</td>
+</tr>
+<tr>
+<td><code>12-18m</code></td>
+<td>12 to 18 months</td>
+</tr>
+<tr>
+<td><code>18-24m</code></td>
+<td>18 to 24 months</td>
+</tr>
+<tr>
+<td><code>2-3y</code></td>
+<td>2 to 3 years</td>
+</tr>
+<tr>
+<td><code>3-5y</code></td>
+<td>3 to 5 years</td>
+</tr>
+<tr>
+<td><code>&gt;5y</code></td>
+<td>More than 5 years</td>
+</tr>
+</tbody></table>
+<h2 id='blockchain-utxo-summaries'>Blockchain UTXO Summaries</h2>
+<p>You can use this endpoint to pull the daily UTXO summaries underlying our age band data. This data could be used to calculate custom age bands.</p>
+
+<p>The <code>reportTime</code> corresponds to the date in the blockchain&#39;s history, and <code>utxoCreatedTime</code> corresponds to the date the UTXOs were created. <code>utxoVolume</code> and <code>utxoCount</code> show the number of distinct UTXOs and their volume that were created on that date.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      utxoDailySummary (first:1) {
+        edges {
+          node {
+            id
+            projectId
+            assetId
+            reportTime
+            utxoCreatedTime
+            utxoCreatedEpochTime
+            utxoVolume
+            utxoCount
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"utxoDailySummary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"utxo_daily_summary__Bitcoin_BTC_BTC__1583884800000__1583798400000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"assetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"reportTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-11T00:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"utxoCreatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-10T00:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"utxoCreatedEpochTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1583798400000</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"utxoVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">229861.19601658</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"utxoCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">384951</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='query-parameters-6'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h2 id='blockchain-daily-active-addresses'>Blockchain Daily Active Addresses</h2>
+<p>You can use this endpoint to pull individual transactions for a given blockchain back to the genesis block.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      addressSummary (first:1) {
+        edges {
+          node {
+            id
+            activeAddresses
+            newAddresses
+            totalAddressCount
+            assetId
+            projectId
+            timestamp
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"addressSummary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daily_address_summary__1583798400000__Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"activeAddresses"</span><span class="p">:</span><span class="w"> </span><span class="mi">826647</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"newAddresses"</span><span class="p">:</span><span class="w"> </span><span class="mi">429371</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"totalAddressCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">636211263</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"assetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-10T00:00:00"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='query-parameters-7'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
 <h1 id='websockets'>Websockets</h1>
 <p>To connect to websockets, you will need to include your public and private keys as query parameters.</p>
 
@@ -1102,10 +1376,6 @@ The record limit for the transactions endpoint is 100,000
 <td>4 hourly prices updated every hour</td>
 </tr>
 </tbody></table>
-<h2 id='order-book-snapshots-2'>Order Book Snapshots</h2>
-<p>Coming soon...</p>
-<h2 id='order-book-streams-2'>Order Book Streams</h2>
-<p>Coming soon...</p>
 <h1 id='errors'>Errors</h1>
 <p>The Digital Assets Data API uses the following error codes:</p>
 
