@@ -213,7 +213,7 @@ You can pull individual trades on a per exchange/per pair basis. Historical trad
 Parameter | Required | Default | Description
 --------- | ------- | -------- | -----------
 exchange | Yes | N/A | The DAD exchange key, e.g. `coinbase` |
-pair | Yes | N/A | The standardized pair/symbol, e.g. `BTC/USD` |
+pair | No | N/A | The standardized pair/symbol, e.g. `BTC/USD` |
 startDate | No | 10 minutes ago | Can't be more than 1 hour apart from endDate
 endDate | No | Now | Can't be more than 1 hour apart from startDate
 startTradeId | No | N/A | Min. Trade ID (where the exchange provides a numeric ID)
@@ -294,8 +294,8 @@ Historical prices and OHLCV data are available through this endpoint. You can sp
 Parameter | Required | Default | Description
 --------- | ------- | -------- | -----------
 dadExchangeId | No | N/A | The DAD exchange key, e.g. `coinbase` |
-pair | Yes | N/A | The standardized pair/symbol, e.g. `BTC/USD` |
-windowType | Yes | `tumble_01m` | The granularity and methodology of the price
+pair | No | N/A | The standardized pair/symbol, e.g. `BTC/USD` |
+windowType | No | `tumble_01m` | The granularity and methodology of the price
 startTime | No | Now | ISO 8601 standard date
 endTime | No | Now | ISO 8601 standard date
 
@@ -325,6 +325,226 @@ Window Type | Description
 <aside class="notice">
 The record limit for the prices endpoint is 100,000
 </aside>
+
+## Derivatives: Instruments
+
+The instruments endpoint can be used to pull relevant metadata about derivative instruments, including their IDs, types, and subtypes.
+
+```graphql
+{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    exchange (dadExchangeId:"deribit") {
+      instruments (first:1) {
+        edges {
+          node {
+            id
+            timestamp
+            marketplace
+            instrumentStatus
+            instrumentId
+            instrumentName
+            underlyingInstrument
+            baseAssetId
+            quoteAssetId
+            expirationTimestampUtc
+            settlementTimestampUtc
+            strikePrice
+            derivativeType
+            derivativeSubtype
+            contractSize
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+> Sample response:
+
+```json
+{
+  "data": {
+    "apiViewer": {
+      "exchange": {
+        "instruments": {
+          "edges": [
+            {
+              "node": {
+                "id": "deribit_BTC-25SEP20-24000-C__1585333262753",
+                "timestamp": "2020-03-27T18:21:02.753000",
+                "marketplace": "deribit",
+                "instrumentStatus": "active",
+                "instrumentId": "deribit_BTC-25SEP20-24000-C",
+                "instrumentName": "BTC-25SEP20-24000-C",
+                "underlyingInstrument": null,
+                "baseAssetId": "BTC",
+                "quoteAssetId": "USD",
+                "expirationTimestampUtc": "2020-09-25T08:00:00",
+                "settlementTimestampUtc": null,
+                "strikePrice": 24000,
+                "derivativeType": "option",
+                "derivativeSubtype": "call",
+                "contractSize": 1
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+### Query Parameters
+
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+dadExchangeId | Yes | N/A | The DAD exchange key, e.g. `coinbase` |
+instrumentId | No | N/A | The standardized symbol, e.g. `deribit_ETH-26JUN20-100-C__1585333151219` |
+startTime | No | 10 minutes ago | ISO 8601 standard date
+endTime | No | Now | ISO 8601 standard date
+derivativeType | No | N/A | The type of derivative, such as `future`, `option`, or `perpetual_swap`
+
+## Derivatives: Instrument Aggregates
+
+The instrument aggregates endpoint includes significant aggregations like price, volume, implied volatility, and open interest.
+
+These aggregations are calculated minutely for now, but may be calculated at various frequencies in the future. The frequency can be determined from the `pollingInterval`, which is displayed in milliseconds. So a pollingInterval of 60000 equates to 1 minute.
+
+```graphql
+{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    exchange (dadExchangeId:"deribit") {
+      instrumentAggregates (first:1) {
+        edges {
+          node {
+            id
+            timestamp
+            pollingInterval
+            marketplace
+            instrumentId
+            instrumentName
+            openInterestContractCount
+            volume24hContractCount
+            volume24hInBase
+            volume24hInUsd
+            liquidationVolume24hr
+            volatilityImplied
+            volatilityImpliedMark
+            baseAssetId
+            quoteAssetId
+            strikePrice
+            price
+            priceOpen
+            priceHigh
+            priceLow
+            priceClose
+            priceHigh24h
+            priceLow24h
+            tradeCount
+            volumeContractCount
+            volumeInBase
+            volumeUsd
+            amount
+            markPrice
+            derivativeType
+            derivativeSubtype
+            underlyingAssetId
+            underlyingPrice
+            fundingRate8h
+            fundingRateCurrent
+            optionDelta
+            optionGamma
+            optionRho
+            optionTheta
+            optionVega
+            bestBidPrice
+            bestBidAmount
+            bestAskPrice
+            bestAskAmount
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+> Sample response:
+
+```json
+{
+  "data": {
+    "apiViewer": {
+      "exchange": {
+        "instrumentAggregates": {
+          "edges": [
+            {
+              "node": {
+                "id": "deribit_ETH-26JUN20-100-C__1585333151219",
+                "timestamp": "2020-03-27T18:19:11.219000",
+                "pollingInterval": 60000,
+                "marketplace": "deribit",
+                "instrumentId": "deribit_ETH-26JUN20-100-C",
+                "instrumentName": "ETH-26JUN20-100-C",
+                "openInterestContractCount": 5,
+                "volume24hContractCount": null,
+                "volume24hInBase": 0,
+                "volume24hInUsd": null,
+                "liquidationVolume24hr": null,
+                "volatilityImplied": null,
+                "volatilityImpliedMark": 119.57,
+                "baseAssetId": "ETH",
+                "quoteAssetId": "USD",
+                "strikePrice": 100,
+                "price": 0.337,
+                "priceOpen": 0,
+                "priceHigh": 0,
+                "priceLow": 0,
+                "priceClose": 0,
+                "priceHigh24h": 0,
+                "priceLow24h": 0,
+                "tradeCount": null,
+                "volumeContractCount": null,
+                "volumeInBase": 0,
+                "volumeUsd": null,
+                "amount": null,
+                "markPrice": 0.356971,
+                "derivativeType": "option",
+                "derivativeSubtype": "call",
+                "underlyingAssetId": "ETH-26JUN20",
+                "underlyingPrice": 134.74,
+                "fundingRate8h": 0,
+                "fundingRateCurrent": 0,
+                "optionDelta": 0.78769,
+                "optionGamma": 0.00361,
+                "optionRho": 0.14401,
+                "optionTheta": -0.12851,
+                "optionVega": 0.19468,
+                "bestBidPrice": 0.3215,
+                "bestBidAmount": 58,
+                "bestAskPrice": 0.3795,
+                "bestAskAmount": 58
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+### Query Parameters
+
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+dadExchangeId | Yes | N/A | The DAD exchange key, e.g. `coinbase` |
+instrumentId | No | N/A | The standardized symbol, e.g. `deribit_ETH-26JUN20-100-C__1585333151219` |
+startTime | No | 10 minutes ago | ISO 8601 standard date
+endTime | No | Now | ISO 8601 standard date
+derivativeType | No | N/A | The type of derivative, such as `future`, `option`, or `perpetual_swap`
 
 ## Supported Blockchains
 

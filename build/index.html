@@ -234,6 +234,12 @@
                     <a href="#prices-candles" class="toc-h2 toc-link" data-title="Prices / Candles">Prices / Candles</a>
                   </li>
                   <li>
+                    <a href="#derivatives-instruments" class="toc-h2 toc-link" data-title="Derivatives: Instruments">Derivatives: Instruments</a>
+                  </li>
+                  <li>
+                    <a href="#derivatives-instrument-aggregates" class="toc-h2 toc-link" data-title="Derivatives: Instrument Aggregates">Derivatives: Instrument Aggregates</a>
+                  </li>
+                  <li>
                     <a href="#supported-blockchains" class="toc-h2 toc-link" data-title="Supported Blockchains">Supported Blockchains</a>
                   </li>
                   <li>
@@ -498,7 +504,7 @@ When filtering by pair, every supported pair for each exchange will be returned,
 </tr>
 <tr>
 <td>pair</td>
-<td>Yes</td>
+<td>No</td>
 <td>N/A</td>
 <td>The standardized pair/symbol, e.g. <code>BTC/USD</code></td>
 </tr>
@@ -611,13 +617,13 @@ The record limit for the trades endpoint is 100,000
 </tr>
 <tr>
 <td>pair</td>
-<td>Yes</td>
+<td>No</td>
 <td>N/A</td>
 <td>The standardized pair/symbol, e.g. <code>BTC/USD</code></td>
 </tr>
 <tr>
 <td>windowType</td>
-<td>Yes</td>
+<td>No</td>
 <td><code>tumble_01m</code></td>
 <td>The granularity and methodology of the price</td>
 </tr>
@@ -694,6 +700,274 @@ The default is <code>tumble_01m</code>, but a list of options is provided below.
 <aside class="notice">
 The record limit for the prices endpoint is 100,000
 </aside>
+<h2 id='derivatives-instruments'>Derivatives: Instruments</h2>
+<p>The instruments endpoint can be used to pull relevant metadata about derivative instruments, including their IDs, types, and subtypes.</p>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    exchange (dadExchangeId:"deribit") {
+      instruments (first:1) {
+        edges {
+          node {
+            id
+            timestamp
+            marketplace
+            instrumentStatus
+            instrumentId
+            instrumentName
+            underlyingInstrument
+            baseAssetId
+            quoteAssetId
+            expirationTimestampUtc
+            settlementTimestampUtc
+            strikePrice
+            derivativeType
+            derivativeSubtype
+            contractSize
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"instruments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit_BTC-25SEP20-24000-C__1585333262753"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-27T18:21:02.753000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"marketplace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"instrumentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"instrumentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit_BTC-25SEP20-24000-C"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"instrumentName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-25SEP20-24000-C"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"underlyingInstrument"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"baseAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"quoteAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"expirationTimestampUtc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-25T08:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"settlementTimestampUtc"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"strikePrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">24000</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"derivativeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"derivativeSubtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"call"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dadExchangeId</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The DAD exchange key, e.g. <code>coinbase</code></td>
+</tr>
+<tr>
+<td>instrumentId</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized symbol, e.g. <code>deribit_ETH-26JUN20-100-C__1585333151219</code></td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>10 minutes ago</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>derivativeType</td>
+<td>No</td>
+<td>N/A</td>
+<td>The type of derivative, such as <code>future</code>, <code>option</code>, or <code>perpetual_swap</code></td>
+</tr>
+</tbody></table>
+<h2 id='derivatives-instrument-aggregates'>Derivatives: Instrument Aggregates</h2>
+<p>The instrument aggregates endpoint includes significant aggregations like price, volume, implied volatility, and open interest.</p>
+
+<p>These aggregations are calculated minutely for now, but may be calculated at various frequencies in the future. The frequency can be determined from the <code>pollingInterval</code>, which is displayed in milliseconds. So a pollingInterval of 60000 equates to 1 minute.</p>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    exchange (dadExchangeId:"deribit") {
+      instrumentAggregates (first:1) {
+        edges {
+          node {
+            id
+            timestamp
+            pollingInterval
+            marketplace
+            instrumentId
+            instrumentName
+            openInterestContractCount
+            volume24hContractCount
+            volume24hInBase
+            volume24hInUsd
+            liquidationVolume24hr
+            volatilityImplied
+            volatilityImpliedMark
+            baseAssetId
+            quoteAssetId
+            strikePrice
+            price
+            priceOpen
+            priceHigh
+            priceLow
+            priceClose
+            priceHigh24h
+            priceLow24h
+            tradeCount
+            volumeContractCount
+            volumeInBase
+            volumeUsd
+            amount
+            markPrice
+            derivativeType
+            derivativeSubtype
+            underlyingAssetId
+            underlyingPrice
+            fundingRate8h
+            fundingRateCurrent
+            optionDelta
+            optionGamma
+            optionRho
+            optionTheta
+            optionVega
+            bestBidPrice
+            bestBidAmount
+            bestAskPrice
+            bestAskAmount
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"instrumentAggregates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit_ETH-26JUN20-100-C__1585333151219"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-27T18:19:11.219000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"pollingInterval"</span><span class="p">:</span><span class="w"> </span><span class="mi">60000</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"marketplace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"instrumentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit_ETH-26JUN20-100-C"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"instrumentName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-26JUN20-100-C"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"openInterestContractCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"volume24hContractCount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"volume24hInBase"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"volume24hInUsd"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"liquidationVolume24hr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"volatilityImplied"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"volatilityImpliedMark"</span><span class="p">:</span><span class="w"> </span><span class="mf">119.57</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"baseAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"quoteAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"strikePrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.337</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"priceOpen"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"priceHigh"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"priceLow"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"priceClose"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"priceHigh24h"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"priceLow24h"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"tradeCount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"volumeContractCount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"volumeInBase"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"volumeUsd"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"markPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.356971</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"derivativeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"derivativeSubtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"call"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"underlyingAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-26JUN20"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"underlyingPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">134.74</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fundingRate8h"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fundingRateCurrent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"optionDelta"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.78769</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"optionGamma"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00361</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"optionRho"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.14401</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"optionTheta"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.12851</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"optionVega"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.19468</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"bestBidPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3215</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"bestBidAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"bestAskPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3795</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"bestAskAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dadExchangeId</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The DAD exchange key, e.g. <code>coinbase</code></td>
+</tr>
+<tr>
+<td>instrumentId</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized symbol, e.g. <code>deribit_ETH-26JUN20-100-C__1585333151219</code></td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>10 minutes ago</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>derivativeType</td>
+<td>No</td>
+<td>N/A</td>
+<td>The type of derivative, such as <code>future</code>, <code>option</code>, or <code>perpetual_swap</code></td>
+</tr>
+</tbody></table>
 <h2 id='supported-blockchains'>Supported Blockchains</h2>
 <p>You can use the supported blockchains endpoint to discover which blockchains are currently supported through this API. In the future, this endpoint will be expanded to also include the datasets for each blockchain. This will be particularly relevant for blockchains that weren&#39;t forked from BTC that have a different data schema or different datasets available (e.g. event logs for Ethereum).</p>
 
@@ -788,7 +1062,7 @@ The record limit for the prices endpoint is 100,000
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='query-parameters-3'>Query Parameters</h3>
+</span></code></pre><h3 id='query-parameters-5'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -879,7 +1153,7 @@ The record limit for the blocks endpoint is 10,000
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='query-parameters-4'>Query Parameters</h3>
+</span></code></pre><h3 id='query-parameters-6'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -993,7 +1267,7 @@ The record limit for the transactions endpoint is 100,000
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='query-parameters-5'>Query Parameters</h3>
+</span></code></pre><h3 id='query-parameters-7'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1126,7 +1400,7 @@ The record limit for the transactions endpoint is 100,000
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='query-parameters-6'>Query Parameters</h3>
+</span></code></pre><h3 id='query-parameters-8'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1200,7 +1474,7 @@ The record limit for the transactions endpoint is 100,000
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='query-parameters-7'>Query Parameters</h3>
+</span></code></pre><h3 id='query-parameters-9'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
