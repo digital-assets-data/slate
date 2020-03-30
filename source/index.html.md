@@ -400,7 +400,7 @@ The instruments endpoint can be used to pull relevant metadata about derivative 
 
 Parameter | Required | Default | Description
 --------- | ------- | -------- | -----------
-dadExchangeId | Yes | N/A | The DAD exchange key, e.g. `coinbase` |
+dadExchangeId | Yes | N/A | The DAD exchange key, e.g. `deribit` |
 instrumentId | No | N/A | The standardized symbol, e.g. `deribit_ETH-26JUN20-100-C__1585333151219` |
 startTime | No | 10 minutes ago | ISO 8601 standard date
 endTime | No | Now | ISO 8601 standard date
@@ -540,7 +540,7 @@ These aggregations are calculated minutely for now, but may be calculated at var
 
 Parameter | Required | Default | Description
 --------- | ------- | -------- | -----------
-dadExchangeId | Yes | N/A | The DAD exchange key, e.g. `coinbase` |
+dadExchangeId | Yes | N/A | The DAD exchange key, e.g. `deribit` |
 instrumentId | No | N/A | The standardized symbol, e.g. `deribit_ETH-26JUN20-100-C__1585333151219` |
 startTime | No | 10 minutes ago | ISO 8601 standard date
 endTime | No | Now | ISO 8601 standard date
@@ -934,6 +934,75 @@ You can use this endpoint to pull daily stats on the number of active addresses 
                 "assetId": "Bitcoin_BTC_BTC",
                 "projectId": "Bitcoin_BTC",
                 "timestamp": "2020-03-10T00:00:00"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+### Query Parameters
+
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+startTime | No | N/A | ISO 8601 standard date |
+endTime | No | N/A | ISO 8601 standard date |
+
+## Blockchain Miner's Rolling Inventory
+
+Miner's Rolling Inventory is a metric that measures the extent to which miners are selling vs retaining the coins that they are generating/earning. We calculate Miner's Rolling Inventory daily over several different intervals: 1 day, 21 days, and 42 days. This endpoint also shows the total inventory still held by miners over each blockchain's history.
+
+> Sample request:
+
+```graphql
+{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      minerInventoryDaily (first:1) {
+        edges {
+          node {
+            id
+            timestamp
+            projectId
+            assetId
+            dailyMri
+            rolling21DayMri
+            rolling42DayMri
+            firstSpend
+            generated
+            unspentInventory
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+> Sample response:
+
+```json
+{
+  "data": {
+    "apiViewer": {
+      "blockchain": {
+        "minerInventoryDaily": {
+          "edges": [
+            {
+              "node": {
+                "id": "miner_inventory__Bitcoin_BTC__1585440000000",
+                "timestamp": "2020-03-29T00:00:00",
+                "projectId": "Bitcoin_BTC",
+                "assetId": "Bitcoin_BTC_BTC",
+                "dailyMri": 90.32193745820581,
+                "rolling21DayMri": 104.4700141839271,
+                "rolling42DayMri": 102.62442152253325,
+                "firstSpend": 1654.9668572299997,
+                "generated": 1832.29778258,
+                "unspentInventory": 1761104.563763461
               }
             }
           ]
