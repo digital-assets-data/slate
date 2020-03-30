@@ -257,6 +257,9 @@
                   <li>
                     <a href="#blockchain-daily-active-addresses" class="toc-h2 toc-link" data-title="Blockchain Daily Active Addresses">Blockchain Daily Active Addresses</a>
                   </li>
+                  <li>
+                    <a href="#blockchain-miner-39-s-rolling-inventory" class="toc-h2 toc-link" data-title="Blockchain Miner's Rolling Inventory">Blockchain Miner's Rolling Inventory</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -777,7 +780,7 @@ The record limit for the prices endpoint is 100,000
 <td>dadExchangeId</td>
 <td>Yes</td>
 <td>N/A</td>
-<td>The DAD exchange key, e.g. <code>coinbase</code></td>
+<td>The DAD exchange key, e.g. <code>deribit</code></td>
 </tr>
 <tr>
 <td>instrumentId</td>
@@ -941,7 +944,7 @@ The record limit for the prices endpoint is 100,000
 <td>dadExchangeId</td>
 <td>Yes</td>
 <td>N/A</td>
-<td>The DAD exchange key, e.g. <code>coinbase</code></td>
+<td>The DAD exchange key, e.g. <code>deribit</code></td>
 </tr>
 <tr>
 <td>instrumentId</td>
@@ -1475,6 +1478,86 @@ The record limit for the transactions endpoint is 100,000
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='query-parameters-9'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h2 id='blockchain-miner-39-s-rolling-inventory'>Blockchain Miner&#39;s Rolling Inventory</h2>
+<p>Miner&#39;s Rolling Inventory is a metric that measures the extent to which miners are selling vs retaining the coins that they are generating/earning. We calculate Miner&#39;s Rolling Inventory daily over several different intervals: 1 day, 21 days, and 42 days. This endpoint also shows the total inventory still held by miners over each blockchain&#39;s history.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    blockchain(dadBlockchainId: "btc") {
+      minerInventoryDaily (first:1) {
+        edges {
+          node {
+            id
+            timestamp
+            projectId
+            assetId
+            dailyMri
+            rolling21DayMri
+            rolling42DayMri
+            firstSpend
+            generated
+            unspentInventory
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"minerInventoryDaily"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"miner_inventory__Bitcoin_BTC__1585440000000"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-29T00:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"assetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"dailyMri"</span><span class="p">:</span><span class="w"> </span><span class="mf">90.32193745820581</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"rolling21DayMri"</span><span class="p">:</span><span class="w"> </span><span class="mf">104.4700141839271</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"rolling42DayMri"</span><span class="p">:</span><span class="w"> </span><span class="mf">102.62442152253325</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"firstSpend"</span><span class="p">:</span><span class="w"> </span><span class="mf">1654.9668572299997</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"generated"</span><span class="p">:</span><span class="w"> </span><span class="mf">1832.29778258</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"unspentInventory"</span><span class="p">:</span><span class="w"> </span><span class="mf">1761104.563763461</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='query-parameters-10'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
