@@ -219,14 +219,14 @@ endDate | No | Now | Can't be more than 1 hour apart from startDate
 startTradeId | No | N/A | Min. Trade ID (where the exchange provides a numeric ID)
 endTradeId | No | N/A | Max. Trade ID (where the exchange provides a numeric ID)
 
-The Trade ID parameters are recommended for filling in missing records, not for general use. They will not work for exchanges that use IDs formatted as strings instead of integers.
+The Trade ID parameters are recommended for filling in missing records, not for general use. They will not work for exchanges that use IDs formatted as strings instead of integers. Date filters must also be applied in order to use the trade ID filters.
 
 If dates are not specified, the endpoint will return all trades within the previous 10 minutes by default.
 <br><br>
 Dates must be formatted per the ISO 8601 standard (e.g.: 2020-01-10T17:49:26Z)
 <br><br>
 <aside class="notice">
-The record limit for the trades endpoint is 100,000
+The record limit for the trades endpoint is 10,000 trades per request
 </aside>
 
 ## Prices / Candles
@@ -305,26 +305,114 @@ The window type must be specified in order to retrieve prices from the API. The 
 <br><br>
 "Tumble" indicates that the price includes all trades from a given window (e.g. 1 minute), and then the next price includes all trades from the following window with no overlap. Each price is thus completely distinct.
 <br><br>
-"Sliding" means that there's overlap in the prices. For example, `sliding_05m_01m` indicates that the prices include trades over the previous 5 minutes, but the price is updated/calculated every minute. Thus, there's a smoothing effect on the prices as trades are included in multiple windows.
-<br><br>
 The default is `tumble_01m`, but a list of options is provided below. This list may be expanded in the future.
 
 Window Type | Description 
 --------- | -------
-`tumble_05s` | 5 secondly prices
 `tumble_01m` | Minutely prices
 `tumble_05m` | 5 minutely prices
 `tumble_15m` | 15 minutely prices
 `tumble_01h` | Hourly prices
-`tumble_04h` | 4 hourly prices
-`sliding_05m_01m` | 5 minutely prices updated every minute
-`sliding_15m_01m` | 15 minutely prices updated every minute
-`sliding_01h_01m` | Hourly prices updated every minute
-`sliding_04h_01h` | 4 hourly prices updated every hour
+`tumble_01d` | Daily prices
 
 <aside class="notice">
 The record limit for the prices endpoint is 100,000
 </aside>
+
+## Order Book Metrics
+
+Digital Assets Data calculates a variety of metrics based on order book snapshots, such as spread, depth, resiliency, and slippage. These metrics are calculated at a variety of different levels based on percentages or the number of price levels.
+
+```graphql
+{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    exchange(dadExchangeId: "coinbase") {
+      orderBookMetrics(metricName:"10%_asks_depth",pair: "BTC/USD", first: 1) {
+        edges {
+          node {
+            id
+            timestamp
+            baseAssetId
+            quoteAssetId
+            pair
+            metricName
+            metricType
+            metricValue
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+> Sample response:
+
+```json
+{
+  "data": {
+    "apiViewer": {
+      "exchange": {
+        "orderBookMetrics": {
+          "edges": [
+            {
+              "node": {
+                "id": "10%_asks_depth__coinbase__Bitcoin_BTC_BTC__USDollar_USD_USD",
+                "timestamp": "2020-07-08T20:35:07.421000",
+                "baseAssetId": "Bitcoin_BTC_BTC",
+                "quoteAssetId": "USDollar_USD_USD",
+                "pair": "BTC/USD",
+                "metricName": "10%_asks_depth",
+                "metricType": "depth",
+                "metricValue": 2866.75202654
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+### Query Parameters
+
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+dadExchangeId | Yes | N/A | The DAD exchange key, e.g. `bitmex` |
+metricName | Yes | N/A | The name of the metric being requested
+pair | No | N/A | The standardized symbol, e.g. `XBTUSD` |
+startTime | No | 10 minutes ago | ISO 8601 standard date
+endTime | No | Now | ISO 8601 standard date
+
+### Metric List
+
+The current and complete list of metrics can be found in the Data Explorer. Here is a sample of the metrics that are available:
+
+- `2%_asks_depth`
+- `2%_asks_depth_usd_converted`
+- `2%_asks_orderbook_resiliency`
+- `2%_asks_orderbook_resiliency_usd_converted`
+- `5%_bids_depth`
+- `5%_bids_depth_usd_converted`
+- `5%_bids_orderbook_resiliency`
+- `5%_bids_orderbook_resiliency_usd_converted`
+- `10%_midpoint_asks_depth`
+- `10%_midpoint_asks_depth_usd_converted`
+- `10%_midpoint_asks_orderbook_resiliency`
+- `10%_midpoint_asks_orderbook_resiliency_usd_converted`
+- `10%_midpoint_bids_depth`
+- `10%_midpoint_bids_depth_usd_converted`
+- `10%_midpoint_bids_orderbook_resiliency`
+- `10%_midpoint_bids_orderbook_resiliency_usd_converted`
+- `dollar_slippage_10000_asks`
+- `dollar_slippage_10000_bids`
+- `dollar_slippage_bps_10000_asks`
+- `dollar_slippage_bps_10000_bids`
+- `metric_spread_quote`
+- `microprice_quote`
+- `microprice_usd_converted`
+- `spread_usd`
 
 ## Derivatives: Instruments
 
@@ -545,6 +633,73 @@ instrumentId | No | N/A | The standardized symbol, e.g. `deribit_ETH-26JUN20-100
 startTime | No | 10 minutes ago | ISO 8601 standard date
 endTime | No | Now | ISO 8601 standard date
 derivativeType | No | N/A | The type of derivative, such as `future`, `option`, or `perpetual_swap`
+
+## Derivatives: Trades
+
+The derivatives trades endpoint can be used to pull individual trades from supported derivative markets.
+
+```graphql
+{
+  apiViewer(publicKey: "foo", privateKey: "bar") {
+    exchange(dadExchangeId:"bitmex") {
+      tradesDerivatives(instrumentName:"XBTUSD", first:1) {
+        edges {
+          node{
+            id
+            timestamp
+            instrumentName
+            instrumentId
+            derivativeType
+            eventId
+            isSell
+            priceInQuote
+            size
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+> Sample response:
+
+```json
+{
+  "data": {
+    "apiViewer": {
+      "exchange": {
+        "tradesDerivatives": {
+          "edges": [
+            {
+              "node": {
+                "id": "XBTUSD__bitmex__77c7218a-4fe9-7348-78b9-16b59405e4ce",
+                "timestamp": "2020-07-07T20:56:24.648000",
+                "instrumentName": "XBTUSD",
+                "instrumentId": "bitmex_XBTUSD",
+                "derivativeType": "swap",
+                "eventId": null,
+                "isSell": true,
+                "priceInQuote": 9236,
+                "size": 3
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+```
+
+### Query Parameters
+
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+dadExchangeId | Yes | N/A | The DAD exchange key, e.g. `bitmex` |
+instrumentName | No | N/A | The standardized symbol, e.g. `XBTUSD` |
+startTime | No | 10 minutes ago | ISO 8601 standard date
+endTime | No | Now | ISO 8601 standard date
 
 ## Supported Blockchains
 
@@ -1059,6 +1214,34 @@ action | Yes | N/A | ping or subscribe
 channels | Yes | trades |  
 pair | Yes | BTC/USD | The standardized pair/symbol
 
+## Derivative Trades
+
+Derivative trades can be pushed to you through the same `exchange` websocket endpoint. That can be accessed from URLs formatted like this:
+
+`wss://api.digitalassetsdata.com/exchange/bitmex?publicKey={foo}&privateKey={bar}`
+
+>Sample message:
+
+```json
+{"action": "subscribe", "channels": ["trades_derivatives"], "instruments": ["XBTUSD"]}
+```
+
+> Sample response:
+
+```json
+{"trade": {"instrumentId": "bitmex_XBTUSD", "priceInQuote": 9432.5, "eventId": "6b0cd966-ea5e-9cbf-89a8-0091e13a16e5", "size": 50000.0, "isSell": 0, "derivativeType": "swap", "instrumentName": "XBTUSD", "timestamp": 1594244866243}, "exchange": "bitmex"}
+```
+
+The websocket will push all new trades on an ongoing basis. The websocket will not push historical trades.
+
+### Message Parameters
+Parameter | Required | Default | Description
+--------- | ------- | -------- | -----------
+action | Yes | N/A | ping or subscribe
+channels | Yes | trades_derivatives |  
+pair | Yes | N/A | The standardized pair/symbol
+
+
 ## Prices / Candles
 
 Prices can be pushed to you through the `prices` websocket endpoint. That can be accessed from this URL:
@@ -1092,16 +1275,19 @@ windows | No | tumble_05s | List of desired price windows/methodologies
 
 Window Type | Description 
 --------- | -------
-`tumble_05s` | 5 secondly prices
 `tumble_01m` | Minutely prices
 `tumble_05m` | 5 minutely prices
 `tumble_15m` | 15 minutely prices
 `tumble_01h` | Hourly prices
-`tumble_04h` | 4 hourly prices
-`sliding_05m_01m` | 5 minutely prices updated every minute
-`sliding_15m_01m` | 15 minutely prices updated every minute
-`sliding_01h_01m` | Hourly prices updated every minute
-`sliding_04h_01h` | 4 hourly prices updated every hour
+`tumble_01d` | Daily prices
+
+# Change Log
+The Digital Assets Data API uses the following error codes:
+
+Date | Updates
+---------- | -------
+7/8/2020 | - Added Order Book Metrics and Derivative Trades endpoints to the GraphQL API<br> - Added Derivative Trades to the websocket<br> - Updated price documentation to reflect currently supported windows
+
 
 # Errors
 The Digital Assets Data API uses the following error codes:
