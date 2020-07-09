@@ -1239,7 +1239,7 @@ Parameter | Required | Default | Description
 --------- | ------- | -------- | -----------
 action | Yes | N/A | ping or subscribe
 channels | Yes | trades_derivatives |  
-pair | Yes | N/A | The standardized pair/symbol
+instruments | Yes | N/A | A list of the standardized derivative symbols
 
 
 ## Prices / Candles
