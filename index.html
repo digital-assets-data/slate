@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>DAD API Reference</title>
 
-    <style>
+    <style media="screen">
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight .gh {
@@ -42,7 +42,7 @@
 .highlight .cs {
   color: #75715e;
 }
-.highlight .c, .highlight .cd {
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
   color: #75715e;
 }
 .highlight .err {
@@ -126,7 +126,7 @@
 .highlight .s1 {
   color: #e6db74;
 }
-.highlight .s {
+.highlight .s, .highlight .sa, .highlight .dl {
   color: #e6db74;
 }
 .highlight .na {
@@ -141,16 +141,13 @@
 .highlight .ne {
   color: #a6e22e;
 }
-.highlight .nf {
+.highlight .nf, .highlight .fm {
   color: #a6e22e;
 }
 .highlight .vc {
   color: #ffffff;
 }
 .highlight .nn {
-  color: #ffffff;
-}
-.highlight .nl {
   color: #ffffff;
 }
 .highlight .ni {
@@ -165,7 +162,7 @@
 .highlight .vi {
   color: #ffffff;
 }
-.highlight .nv {
+.highlight .nv, .highlight .vm {
   color: #ffffff;
 }
 .highlight .w {
@@ -176,6 +173,9 @@
 }
 .highlight .n, .highlight .py, .highlight .nx {
   color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
 }
 .highlight .ow {
   color: #f92672;
@@ -196,26 +196,104 @@
   color: #f92672;
 }
     </style>
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all.js"></script>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-a3c11e89.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-b29b926d.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-e9bde216.js"></script>
+
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" alt="Navbar" />
+        <img src="images/navbar-cad8cdcb.png" alt="" />
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo.png" class="logo" alt="Logo" />
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-        </div>
+      <img src="images/logo-1e815a84.png" class="logo" alt="" />
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -228,216 +306,1752 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#graphql" class="toc-h1 toc-link" data-title="GraphQL">GraphQL</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#supported-exchanges-pairs" class="toc-h2 toc-link" data-title="Supported Exchanges / Pairs">Supported Exchanges / Pairs</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#trades" class="toc-h2 toc-link" data-title="Trades">Trades</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#prices-candles" class="toc-h2 toc-link" data-title="Prices / Candles">Prices / Candles</a>
+                  </li>
+                  <li>
+                    <a href="#order-book-metrics" class="toc-h2 toc-link" data-title="Order Book Metrics">Order Book Metrics</a>
+                  </li>
+                  <li>
+                    <a href="#derivatives-instruments" class="toc-h2 toc-link" data-title="Derivatives: Instruments">Derivatives: Instruments</a>
+                  </li>
+                  <li>
+                    <a href="#derivatives-instrument-aggregates" class="toc-h2 toc-link" data-title="Derivatives: Instrument Aggregates">Derivatives: Instrument Aggregates</a>
+                  </li>
+                  <li>
+                    <a href="#derivatives-trades" class="toc-h2 toc-link" data-title="Derivatives: Trades">Derivatives: Trades</a>
+                  </li>
+                  <li>
+                    <a href="#supported-blockchains" class="toc-h2 toc-link" data-title="Supported Blockchains">Supported Blockchains</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-blocks" class="toc-h2 toc-link" data-title="Blockchain Blocks">Blockchain Blocks</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-transactions" class="toc-h2 toc-link" data-title="Blockchain Transactions">Blockchain Transactions</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-utxo-age-bands" class="toc-h2 toc-link" data-title="Blockchain UTXO Age Bands">Blockchain UTXO Age Bands</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-utxo-summaries" class="toc-h2 toc-link" data-title="Blockchain UTXO Summaries">Blockchain UTXO Summaries</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-daily-active-addresses" class="toc-h2 toc-link" data-title="Blockchain Daily Active Addresses">Blockchain Daily Active Addresses</a>
+                  </li>
+                  <li>
+                    <a href="#blockchain-miner-39-s-rolling-inventory" class="toc-h2 toc-link" data-title="Blockchain Miner's Rolling Inventory">Blockchain Miner's Rolling Inventory</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#websockets" class="toc-h1 toc-link" data-title="Websockets">Websockets</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#trades-2" class="toc-h2 toc-link" data-title="Trades">Trades</a>
+                  </li>
+                  <li>
+                    <a href="#derivative-trades" class="toc-h2 toc-link" data-title="Derivative Trades">Derivative Trades</a>
+                  </li>
+                  <li>
+                    <a href="#prices-candles-2" class="toc-h2 toc-link" data-title="Prices / Candles">Prices / Candles</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://app.digitalassetsdata.com/access-keys' target="_blank">Manage API Keys</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Digital Assets Data API documentation. This documentation provides detailed instructions for leveraging the DAD API. If you are looking to consume our market data outside of the platform, you have come to the right place.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>If you need assistance consuming data from our APIs after reviewing this documentation, please reach out to us at <a href="mailto:support@digitalassetsdata.com" target="_blank">support@digitalassetsdata.com</a>.</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
+<p>We currently support two methods for retrieving data:</p>
+
+<ol>
+<li>Batch requests (pull) through GraphQL</li>
+<li>Continuous feeds (push) via websockets</li>
+</ol>
+
+<p>Websockets are ideal for ingesting large volumes of data continuously on an ongoing basis. If you&#39;re looking to pull a specific subset of data, especially historical data, then you should use the GraphQL endpoints.</p>
 <h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>You will need to authenticate in order to access either the GraphQL endpoints or the websockets using public and private keys. You can retrieve your public key and generate a private key <a href="https://app.digitalassetsdata.com/access-keys" target="_blank">here</a>.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>For websockets, you will need to include your public and private keys as query parameters. That will look like this:</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p><code>wss://api.digitalassetsdata.com/exchange/coinbase?publicKey={foo}&amp;privateKey={bar}</code></p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>For GraphQL, the public and private keys will need to be included in the request headers. A sample code snippet for Python is shown to the right.</p>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'DAD-PUBLIC-KEY'</span><span class="p">:</span> <span class="s">'foo'</span><span class="p">,</span>
+  <span class="s">'DAD-PRIVATE-KEY'</span><span class="p">:</span> <span class="s">'bar'</span>
+<span class="p">}</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s">'''
+  {
+    apiViewer {
+      username
+    }
+  }
+'''</span>
+<span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'query'</span><span class="p">:</span> <span class="n">query</span>
+<span class="p">}</span>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span>
+  <span class="s">'https://api.digitalassetsdata.com/graphql/'</span><span class="p">,</span>
+  <span class="n">json</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
+  <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+<span class="p">).</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div>
+<p>Make sure to replace <code>foo</code> and <code>bar</code> with your public and private key, respectively. Your public key will never change, and if you lose your private key you can generate a new one anytime.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You will need both a public and private key to authenticate.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='graphql'>GraphQL</h1>
+<p>GraphQL is a more flexible alternative to the traditional REST framework. If you are new to GraphQL, we recommend engaging with the introduction materials on their <a href="https://graphql.org/learn/" target="_blank">website</a>.
+If you are already comfortable with GraphQL you can review additional documentation and test your connection and your queries using our <a href="/schema-explorer" target="_blank">GraphQL Explorer</a>.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Sample connection test:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w"> 
+    </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="s2">"foo"</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">username</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@digitalassetsdata.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>You can test your connection by opening the GraphQL explorer and copying the code snippet to the right into the query editor in the left panel, swapping in your public and private keys, and then pressing the <code>play</code> button in the header. If the connection was successful, your username will be returned. If the connection was unsuccessful, you will get an error message. If that&#39;s the case, double check that you&#39;ve entered your API keys correctly.</p>
+
+<p>While GraphQL provides a flexible query language for interacting with our APIs that will enable you to pull exactly what you need (and no more), we have documented the most common use cases with code snippets and example responses below. Feel free to test these code snippets yourself in the GraphQL Explorer.</p>
+<h2 id='supported-exchanges-pairs'>Supported Exchanges / Pairs</h2>
+<p>You can use the supported exchanges endpoint to determine which exchanges and pairs are currently supported through the API.</p>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
 <th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>forPair</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized pair/symbol</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>dadExchangeId</td>
+<td>No</td>
+<td>N/A</td>
+<td>The DAD exchange key</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<p>You can use the query parameters to filter by exchange or pair. This is useful when trying to determine which exchanges support a given pair, or you&#39;re interested in finding the supported symbols for a particular exchange.</p>
+
+<p>In that case, you&#39;d swap out the supportedExchanges line in the sample request to the right with this:</p>
+
+<p><code>supportedExchanges (dadExchangeId: &quot;Coinbase&quot;) {</code></p>
+
+<p>The same concept applies when filtering by pair, like this:</p>
+
+<p><code>supportedExchanges (forPair: &quot;BTC/USD&quot;) {</code></p>
+
+<aside class="notice">
+When filtering by pair, every supported pair for each exchange will be returned, however only exchanges that support the specific pair you entered will be returned.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Sample request:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w"> 
+    </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="s2">"foo="</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">supportedExchanges</span><span class="w"> </span><span class="p">(</span><span class="n">dadExchangeId</span><span class="p">:</span><span class="w"> </span><span class="s2">"Coinbase"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">dadExchangeId</span><span class="w">
+      </span><span class="n">pairs</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"supportedExchanges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"dadExchangeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kraken"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"pairs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"ADA/BTC"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"dadExchangeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"pairs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"ALGO/USD"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"BTC/USD"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h2 id='trades'>Trades</h2>
+<p>You can pull individual trades on a per exchange/per pair basis. Historical trades are available for up to an hour at a time using the <code>startDate</code> and <code>endDate</code> parameters. You can use the parameters to cycle through historical trades and pull as much history as Digital Assets Data supports.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w"> 
+    </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="s2">"foo"</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">exchange</span><span class="p">(</span><span class="n">dadExchangeId</span><span class="p">:</span><span class="s2">"coinbase"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">trades</span><span class="p">(</span><span class="n">pair</span><span class="p">:</span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w"> </span><span class="n">first</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">id</span><span class="w">
+            </span><span class="n">dadExchangeId</span><span class="w">
+            </span><span class="n">timestamp</span><span class="w">
+            </span><span class="n">pair</span><span class="w">
+            </span><span class="n">price</span><span class="w">
+            </span><span class="n">volume</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"trades"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80910148"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"dadExchangeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-10T19:54:28.237000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">8068.8798828125</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.014999999664723873</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>exchange</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The DAD exchange key, e.g. <code>coinbase</code></td>
+</tr>
+<tr>
+<td>pair</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized pair/symbol, e.g. <code>BTC/USD</code></td>
+</tr>
+<tr>
+<td>startDate</td>
+<td>No</td>
+<td>10 minutes ago</td>
+<td>Can&#39;t be more than 1 hour apart from endDate</td>
+</tr>
+<tr>
+<td>endDate</td>
+<td>No</td>
+<td>Now</td>
+<td>Can&#39;t be more than 1 hour apart from startDate</td>
+</tr>
+<tr>
+<td>startTradeId</td>
+<td>No</td>
+<td>N/A</td>
+<td>Min. Trade ID (where the exchange provides a numeric ID)</td>
+</tr>
+<tr>
+<td>endTradeId</td>
+<td>No</td>
+<td>N/A</td>
+<td>Max. Trade ID (where the exchange provides a numeric ID)</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>The Trade ID parameters are recommended for filling in missing records, not for general use. They will not work for exchanges that use IDs formatted as strings instead of integers. Date filters must also be applied in order to use the trade ID filters.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>If dates are not specified, the endpoint will return all trades within the previous 10 minutes by default.
+<br><br>
+Dates must be formatted per the ISO 8601 standard (e.g.: 2020-01-10T17:49:26Z)
+<br><br>
+<aside class="notice">
+The record limit for the trades endpoint is 10,000 trades per request
+</aside></p>
+<h2 id='prices-candles'>Prices / Candles</h2>
+<p>Historical prices and OHLCV data are available through this endpoint. You can specify the exchange, pairs, and granularity of the prices.</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Sample request:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">prices</span><span class="p">(</span><span class="n">dadExchangeId</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">,</span><span class="w"> </span><span class="n">pair</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w"> </span><span class="n">windowType</span><span class="p">:</span><span class="w"> </span><span class="s2">"tumble_01h"</span><span class="p">,</span><span class="w"> </span><span class="n">first</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">periodStart</span><span class="w">
+          </span><span class="n">periodEnd</span><span class="w">
+          </span><span class="n">marketplace</span><span class="w">
+          </span><span class="n">pair</span><span class="w">
+          </span><span class="n">open</span><span class="w">
+          </span><span class="n">high</span><span class="w">
+          </span><span class="n">low</span><span class="w">
+          </span><span class="n">close</span><span class="w">
+          </span><span class="n">volume</span><span class="w">
+          </span><span class="n">quoteVolume</span><span class="w">
+          </span><span class="n">tradeCount</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"prices"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"periodStart"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-31T17:00:00"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"periodEnd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-31T18:00:00+00:00"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"marketplace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"open"</span><span class="p">:</span><span class="w"> </span><span class="mf">9271.650390625</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"high"</span><span class="p">:</span><span class="w"> </span><span class="mf">9297.08984375</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"low"</span><span class="p">:</span><span class="w"> </span><span class="mi">9260</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"close"</span><span class="p">:</span><span class="w"> </span><span class="mi">9262</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">448.23468017578125</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"quoteVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">4157213.5</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"tradeCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2497</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='query-parameters-2'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>dadExchangeId</td>
+<td>No</td>
+<td>N/A</td>
+<td>The DAD exchange key, e.g. <code>coinbase</code></td>
+</tr>
+<tr>
+<td>pair</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized pair/symbol, e.g. <code>BTC/USD</code></td>
+</tr>
+<tr>
+<td>windowType</td>
+<td>No</td>
+<td><code>tumble_01m</code></td>
+<td>The granularity and methodology of the price</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h3 id='window-types'>Window Types</h3>
+<p>The window type must be specified in order to retrieve prices from the API. The window type determines the methodology, granularity, and update frequency of the prices.
+<br><br>
+&quot;Tumble&quot; indicates that the price includes all trades from a given window (e.g. 1 minute), and then the next price includes all trades from the following window with no overlap. Each price is thus completely distinct.
+<br><br>
+The default is <code>tumble_01m</code>, but a list of options is provided below. This list may be expanded in the future.</p>
+
+<table><thead>
+<tr>
+<th>Window Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>tumble_01m</code></td>
+<td>Minutely prices</td>
+</tr>
+<tr>
+<td><code>tumble_05m</code></td>
+<td>5 minutely prices</td>
+</tr>
+<tr>
+<td><code>tumble_15m</code></td>
+<td>15 minutely prices</td>
+</tr>
+<tr>
+<td><code>tumble_01h</code></td>
+<td>Hourly prices</td>
+</tr>
+<tr>
+<td><code>tumble_01d</code></td>
+<td>Daily prices</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The record limit for the prices endpoint is 100,000
+</aside>
+<h2 id='order-book-metrics'>Order Book Metrics</h2>
+<p>Digital Assets Data calculates a variety of metrics based on order book snapshots, such as spread, depth, resiliency, and slippage. These metrics are calculated at a variety of different levels based on percentages or the number of price levels.</p>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">exchange</span><span class="p">(</span><span class="n">dadExchangeId</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">orderBookMetrics</span><span class="p">(</span><span class="n">metricName</span><span class="p">:</span><span class="s2">"10%_asks_depth"</span><span class="p">,</span><span class="n">pair</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w"> </span><span class="n">first</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">id</span><span class="w">
+            </span><span class="n">timestamp</span><span class="w">
+            </span><span class="n">baseAssetId</span><span class="w">
+            </span><span class="n">quoteAssetId</span><span class="w">
+            </span><span class="n">pair</span><span class="w">
+            </span><span class="n">metricName</span><span class="w">
+            </span><span class="n">metricType</span><span class="w">
+            </span><span class="n">metricValue</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"orderBookMetrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10%_asks_depth__coinbase__Bitcoin_BTC_BTC__USDollar_USD_USD"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-07-08T20:35:07.421000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"baseAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quoteAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDollar_USD_USD"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"metricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10%_asks_depth"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"metricType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"depth"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"metricValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">2866.75202654</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dadExchangeId</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The DAD exchange key, e.g. <code>bitmex</code></td>
+</tr>
+<tr>
+<td>metricName</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The name of the metric being requested</td>
+</tr>
+<tr>
+<td>pair</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized symbol, e.g. <code>XBTUSD</code></td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>10 minutes ago</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h3 id='metric-list'>Metric List</h3>
+<p>The current and complete list of metrics can be found in the Data Explorer. Here is a sample of the metrics that are available:</p>
+
+<ul>
+<li><code>2%_asks_depth</code></li>
+<li><code>2%_asks_depth_usd_converted</code></li>
+<li><code>2%_asks_orderbook_resiliency</code></li>
+<li><code>2%_asks_orderbook_resiliency_usd_converted</code></li>
+<li><code>5%_bids_depth</code></li>
+<li><code>5%_bids_depth_usd_converted</code></li>
+<li><code>5%_bids_orderbook_resiliency</code></li>
+<li><code>5%_bids_orderbook_resiliency_usd_converted</code></li>
+<li><code>10%_midpoint_asks_depth</code></li>
+<li><code>10%_midpoint_asks_depth_usd_converted</code></li>
+<li><code>10%_midpoint_asks_orderbook_resiliency</code></li>
+<li><code>10%_midpoint_asks_orderbook_resiliency_usd_converted</code></li>
+<li><code>10%_midpoint_bids_depth</code></li>
+<li><code>10%_midpoint_bids_depth_usd_converted</code></li>
+<li><code>10%_midpoint_bids_orderbook_resiliency</code></li>
+<li><code>10%_midpoint_bids_orderbook_resiliency_usd_converted</code></li>
+<li><code>dollar_slippage_10000_asks</code></li>
+<li><code>dollar_slippage_10000_bids</code></li>
+<li><code>dollar_slippage_bps_10000_asks</code></li>
+<li><code>dollar_slippage_bps_10000_bids</code></li>
+<li><code>metric_spread_quote</code></li>
+<li><code>microprice_quote</code></li>
+<li><code>microprice_usd_converted</code></li>
+<li><code>spread_usd</code></li>
+</ul>
+<h2 id='derivatives-instruments'>Derivatives: Instruments</h2>
+<p>The instruments endpoint can be used to pull relevant metadata about derivative instruments, including their IDs, types, and subtypes.</p>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">exchange</span><span class="w"> </span><span class="p">(</span><span class="n">dadExchangeId</span><span class="p">:</span><span class="s2">"deribit"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">instruments</span><span class="w"> </span><span class="p">(</span><span class="n">first</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">id</span><span class="w">
+            </span><span class="n">timestamp</span><span class="w">
+            </span><span class="n">marketplace</span><span class="w">
+            </span><span class="n">instrumentStatus</span><span class="w">
+            </span><span class="n">instrumentId</span><span class="w">
+            </span><span class="n">instrumentName</span><span class="w">
+            </span><span class="n">underlyingInstrument</span><span class="w">
+            </span><span class="n">baseAssetId</span><span class="w">
+            </span><span class="n">quoteAssetId</span><span class="w">
+            </span><span class="n">expirationTimestampUtc</span><span class="w">
+            </span><span class="n">settlementTimestampUtc</span><span class="w">
+            </span><span class="n">strikePrice</span><span class="w">
+            </span><span class="n">derivativeType</span><span class="w">
+            </span><span class="n">derivativeSubtype</span><span class="w">
+            </span><span class="n">contractSize</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"instruments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit_BTC-25SEP20-24000-C__1585333262753"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-27T18:21:02.753000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"marketplace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"instrumentStatus"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"instrumentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit_BTC-25SEP20-24000-C"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"instrumentName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-25SEP20-24000-C"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"underlyingInstrument"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"baseAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quoteAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"expirationTimestampUtc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-25T08:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"settlementTimestampUtc"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"strikePrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">24000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"derivativeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"derivativeSubtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"call"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dadExchangeId</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The DAD exchange key, e.g. <code>deribit</code></td>
+</tr>
+<tr>
+<td>instrumentId</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized symbol, e.g. <code>deribit_ETH-26JUN20-100-C__1585333151219</code></td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>10 minutes ago</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>derivativeType</td>
+<td>No</td>
+<td>N/A</td>
+<td>The type of derivative, such as <code>future</code>, <code>option</code>, or <code>perpetual_swap</code></td>
+</tr>
+</tbody></table>
+<h2 id='derivatives-instrument-aggregates'>Derivatives: Instrument Aggregates</h2>
+<p>The instrument aggregates endpoint includes significant aggregations like price, volume, implied volatility, and open interest.</p>
+
+<p>These aggregations are calculated minutely for now, but may be calculated at various frequencies in the future. The frequency can be determined from the <code>pollingInterval</code>, which is displayed in milliseconds. So a pollingInterval of 60000 equates to 1 minute.</p>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">exchange</span><span class="w"> </span><span class="p">(</span><span class="n">dadExchangeId</span><span class="p">:</span><span class="s2">"deribit"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">instrumentAggregates</span><span class="w"> </span><span class="p">(</span><span class="n">first</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">id</span><span class="w">
+            </span><span class="n">timestamp</span><span class="w">
+            </span><span class="n">pollingInterval</span><span class="w">
+            </span><span class="n">marketplace</span><span class="w">
+            </span><span class="n">instrumentId</span><span class="w">
+            </span><span class="n">instrumentName</span><span class="w">
+            </span><span class="n">openInterestContractCount</span><span class="w">
+            </span><span class="n">volume24hContractCount</span><span class="w">
+            </span><span class="n">volume24hInBase</span><span class="w">
+            </span><span class="n">volume24hInUsd</span><span class="w">
+            </span><span class="n">liquidationVolume24hr</span><span class="w">
+            </span><span class="n">volatilityImplied</span><span class="w">
+            </span><span class="n">volatilityImpliedMark</span><span class="w">
+            </span><span class="n">baseAssetId</span><span class="w">
+            </span><span class="n">quoteAssetId</span><span class="w">
+            </span><span class="n">strikePrice</span><span class="w">
+            </span><span class="n">price</span><span class="w">
+            </span><span class="n">priceOpen</span><span class="w">
+            </span><span class="n">priceHigh</span><span class="w">
+            </span><span class="n">priceLow</span><span class="w">
+            </span><span class="n">priceClose</span><span class="w">
+            </span><span class="n">priceHigh24h</span><span class="w">
+            </span><span class="n">priceLow24h</span><span class="w">
+            </span><span class="n">tradeCount</span><span class="w">
+            </span><span class="n">volumeContractCount</span><span class="w">
+            </span><span class="n">volumeInBase</span><span class="w">
+            </span><span class="n">volumeUsd</span><span class="w">
+            </span><span class="n">amount</span><span class="w">
+            </span><span class="n">markPrice</span><span class="w">
+            </span><span class="n">derivativeType</span><span class="w">
+            </span><span class="n">derivativeSubtype</span><span class="w">
+            </span><span class="n">underlyingAssetId</span><span class="w">
+            </span><span class="n">underlyingPrice</span><span class="w">
+            </span><span class="n">fundingRate8h</span><span class="w">
+            </span><span class="n">fundingRateCurrent</span><span class="w">
+            </span><span class="n">optionDelta</span><span class="w">
+            </span><span class="n">optionGamma</span><span class="w">
+            </span><span class="n">optionRho</span><span class="w">
+            </span><span class="n">optionTheta</span><span class="w">
+            </span><span class="n">optionVega</span><span class="w">
+            </span><span class="n">bestBidPrice</span><span class="w">
+            </span><span class="n">bestBidAmount</span><span class="w">
+            </span><span class="n">bestAskPrice</span><span class="w">
+            </span><span class="n">bestAskAmount</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"instrumentAggregates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit_ETH-26JUN20-100-C__1585333151219"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-27T18:19:11.219000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"pollingInterval"</span><span class="p">:</span><span class="w"> </span><span class="mi">60000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"marketplace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"instrumentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deribit_ETH-26JUN20-100-C"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"instrumentName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-26JUN20-100-C"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"openInterestContractCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volume24hContractCount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volume24hInBase"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volume24hInUsd"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"liquidationVolume24hr"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volatilityImplied"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volatilityImpliedMark"</span><span class="p">:</span><span class="w"> </span><span class="mf">119.57</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"baseAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quoteAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"strikePrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.337</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceOpen"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceHigh"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceLow"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceClose"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceHigh24h"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceLow24h"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"tradeCount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volumeContractCount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volumeInBase"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volumeUsd"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"markPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.356971</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"derivativeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"option"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"derivativeSubtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"call"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"underlyingAssetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-26JUN20"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"underlyingPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">134.74</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"fundingRate8h"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"fundingRateCurrent"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"optionDelta"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.78769</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"optionGamma"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00361</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"optionRho"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.14401</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"optionTheta"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.12851</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"optionVega"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.19468</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"bestBidPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3215</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"bestBidAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"bestAskPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3795</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"bestAskAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dadExchangeId</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The DAD exchange key, e.g. <code>deribit</code></td>
+</tr>
+<tr>
+<td>instrumentId</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized symbol, e.g. <code>deribit_ETH-26JUN20-100-C__1585333151219</code></td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>10 minutes ago</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>derivativeType</td>
+<td>No</td>
+<td>N/A</td>
+<td>The type of derivative, such as <code>future</code>, <code>option</code>, or <code>perpetual_swap</code></td>
+</tr>
+</tbody></table>
+<h2 id='derivatives-trades'>Derivatives: Trades</h2>
+<p>The derivatives trades endpoint can be used to pull individual trades from supported derivative markets.</p>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">exchange</span><span class="p">(</span><span class="n">dadExchangeId</span><span class="p">:</span><span class="s2">"bitmex"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">tradesDerivatives</span><span class="p">(</span><span class="n">instrumentName</span><span class="p">:</span><span class="s2">"XBTUSD"</span><span class="p">,</span><span class="w"> </span><span class="n">first</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="p">{</span><span class="w">
+            </span><span class="n">id</span><span class="w">
+            </span><span class="n">timestamp</span><span class="w">
+            </span><span class="n">instrumentName</span><span class="w">
+            </span><span class="n">instrumentId</span><span class="w">
+            </span><span class="n">derivativeType</span><span class="w">
+            </span><span class="n">eventId</span><span class="w">
+            </span><span class="n">isSell</span><span class="w">
+            </span><span class="n">priceInQuote</span><span class="w">
+            </span><span class="n">size</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"tradesDerivatives"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XBTUSD__bitmex__77c7218a-4fe9-7348-78b9-16b59405e4ce"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-07-07T20:56:24.648000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"instrumentName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XBTUSD"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"instrumentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bitmex_XBTUSD"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"derivativeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"swap"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"isSell"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"priceInQuote"</span><span class="p">:</span><span class="w"> </span><span class="mi">9236</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-6'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dadExchangeId</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>The DAD exchange key, e.g. <code>bitmex</code></td>
+</tr>
+<tr>
+<td>instrumentName</td>
+<td>No</td>
+<td>N/A</td>
+<td>The standardized symbol, e.g. <code>XBTUSD</code></td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>10 minutes ago</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h2 id='supported-blockchains'>Supported Blockchains</h2>
+<p>You can use the supported blockchains endpoint to discover which blockchains are currently supported through this API. In the future, this endpoint will be expanded to also include the datasets for each blockchain. This will be particularly relevant for blockchains that weren&#39;t forked from BTC that have a different data schema or different datasets available (e.g. event logs for Ethereum).</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">supportedBlockchains</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">dadBlockchainId</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"supportedBlockchains"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ltc"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dash"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zec"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"dadBlockchainId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zen"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h2 id='blockchain-blocks'>Blockchain Blocks</h2>
+<p>You can use this endpoint to pull individual blocks for a given blockchain back to the genesis block.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">blockchain</span><span class="p">(</span><span class="n">dadBlockchainId</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">blocks</span><span class="p">(</span><span class="n">first</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">timestamp</span><span class="w">
+            </span><span class="n">blockHeight</span><span class="w">
+            </span><span class="n">blockHash</span><span class="w">
+            </span><span class="n">blockSize</span><span class="w">
+            </span><span class="n">blockReward</span><span class="w">
+            </span><span class="n">difficulty</span><span class="w">
+            </span><span class="n">transactionCount</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-30T17:48:54"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"blockHeight"</span><span class="p">:</span><span class="w"> </span><span class="mi">615247</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"blockHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000000000000001725096df09c4dee4970e4cf0f59c574572209c967b90"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"blockSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">941855</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"blockReward"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"difficulty"</span><span class="p">:</span><span class="w"> </span><span class="mi">15466098589696</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transactionCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2635</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='query-parameters-7'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>blockHeight</td>
+<td>No</td>
+<td>N/A</td>
+<td>The block height, aka block number</td>
+</tr>
+<tr>
+<td>blockHash</td>
+<td>No</td>
+<td>N/A</td>
+<td>The block ID</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>24 hours ago</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>Now</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The record limit for the blocks endpoint is 10,000
+</aside>
+<h2 id='blockchain-transactions'>Blockchain Transactions</h2>
+<p>You can use this endpoint to pull individual transactions for a given blockchain back to the genesis block.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">blockchain</span><span class="p">(</span><span class="n">dadBlockchainId</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">transactions</span><span class="p">(</span><span class="n">first</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">timestamp</span><span class="w">
+            </span><span class="n">transactionHash</span><span class="w">
+            </span><span class="n">blockHeight</span><span class="w">
+            </span><span class="n">transactionIndex</span><span class="w">
+            </span><span class="n">outputVolume</span><span class="w">
+            </span><span class="n">feeVolume</span><span class="w">
+            </span><span class="n">isCoinbase</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-01-31T19:44:39"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transactionHash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"697dd0932db6bc470db8bedf578ca962afa977cf1607b3f0965acd5b0a4258e3"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"blockHeight"</span><span class="p">:</span><span class="w"> </span><span class="mi">615396</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transactionIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">379</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"outputVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2200581431388855</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"feeVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00010469999688211828</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"isCoinbase"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='query-parameters-8'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>blockHeight</td>
+<td>No</td>
+<td>24 hours ago</td>
+<td>The block number</td>
+</tr>
+<tr>
+<td>transactionHash</td>
+<td>No</td>
+<td>Now</td>
+<td>The transaction ID</td>
+</tr>
+<tr>
+<td>blockHash</td>
+<td>No</td>
+<td>N/A</td>
+<td>The block ID</td>
+</tr>
+<tr>
+<td>isCoinbase</td>
+<td>No</td>
+<td>24 hours ago</td>
+<td>Boolean for coinbase transactions</td>
+</tr>
+<tr>
+<td>outputVolumeMin</td>
+<td>No</td>
+<td>Now</td>
+<td>Minimum transaction size</td>
+</tr>
+<tr>
+<td>outputVolumeMax</td>
+<td>No</td>
+<td>Now</td>
+<td>Maximum transaction size</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The record limit for the transactions endpoint is 100,000
+</aside>
+<h2 id='blockchain-utxo-age-bands'>Blockchain UTXO Age Bands</h2>
+<p>You can use this endpoint to pull daily UTXO age band data based on Digital Assets Data&#39;s default age bands. The <code>reportDate</code> corresponds to the date in the blockchain&#39;s history and <code>ageBandPercent</code> shows the percentage of UTXO volume within the relevant age band. </p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">blockchain</span><span class="p">(</span><span class="n">dadBlockchainId</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">utxoDailyAgeBands</span><span class="w"> </span><span class="p">(</span><span class="n">first</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">id</span><span class="w">
+            </span><span class="n">projectId</span><span class="w">
+            </span><span class="n">assetId</span><span class="w">
+            </span><span class="n">reportDate</span><span class="w">
+            </span><span class="n">ageBand</span><span class="w">
+            </span><span class="n">ageBandVolume</span><span class="w">
+            </span><span class="n">ageBandPercent</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"utxoDailyAgeBands"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"utxo_daily_age_bands__Bitcoin_BTC_BTC__1583798400000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"assetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"reportDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-10T00:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"ageBand"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18-24m"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"ageBandVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">30589.00795745</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"ageBandPercent"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.006703168568080371</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-9'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h3 id='age-bands'>Age Bands</h3>
+<p>The default age bands used by Digital Assets Data are listed below.</p>
+
+<table><thead>
+<tr>
+<th>Age Band</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>&lt;1d</code></td>
+<td>Less than 24 hours</td>
+</tr>
+<tr>
+<td><code>1d-1w</code></td>
+<td>1 day to 1 week</td>
+</tr>
+<tr>
+<td><code>1w-1m</code></td>
+<td>1 week to 1 month</td>
+</tr>
+<tr>
+<td><code>1-3m</code></td>
+<td>1 to 3 months</td>
+</tr>
+<tr>
+<td><code>3-6m</code></td>
+<td>3 to 6 months</td>
+</tr>
+<tr>
+<td><code>6-12m</code></td>
+<td>6 to 12 months</td>
+</tr>
+<tr>
+<td><code>12-18m</code></td>
+<td>12 to 18 months</td>
+</tr>
+<tr>
+<td><code>18-24m</code></td>
+<td>18 to 24 months</td>
+</tr>
+<tr>
+<td><code>2-3y</code></td>
+<td>2 to 3 years</td>
+</tr>
+<tr>
+<td><code>3-5y</code></td>
+<td>3 to 5 years</td>
+</tr>
+<tr>
+<td><code>&gt;5y</code></td>
+<td>More than 5 years</td>
+</tr>
+</tbody></table>
+<h2 id='blockchain-utxo-summaries'>Blockchain UTXO Summaries</h2>
+<p>You can use this endpoint to pull the daily UTXO summaries underlying our age band data. This data could be used to calculate custom age bands.</p>
+
+<p>The <code>reportTime</code> corresponds to the date in the blockchain&#39;s history, and <code>utxoCreatedTime</code> corresponds to the date the UTXOs were created. <code>utxoVolume</code> and <code>utxoCount</code> show the number of distinct UTXOs and their volume that were created on that date.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">blockchain</span><span class="p">(</span><span class="n">dadBlockchainId</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">utxoDailySummary</span><span class="w"> </span><span class="p">(</span><span class="n">first</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">id</span><span class="w">
+            </span><span class="n">projectId</span><span class="w">
+            </span><span class="n">assetId</span><span class="w">
+            </span><span class="n">reportTime</span><span class="w">
+            </span><span class="n">utxoCreatedTime</span><span class="w">
+            </span><span class="n">utxoCreatedEpochTime</span><span class="w">
+            </span><span class="n">utxoVolume</span><span class="w">
+            </span><span class="n">utxoCount</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"utxoDailySummary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"utxo_daily_summary__Bitcoin_BTC_BTC__1583884800000__1583798400000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"assetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"reportTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-11T00:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"utxoCreatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-10T00:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"utxoCreatedEpochTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1583798400000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"utxoVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">229861.19601658</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"utxoCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">384951</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div><h3 id='query-parameters-10'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h2 id='blockchain-daily-active-addresses'>Blockchain Daily Active Addresses</h2>
+<p>You can use this endpoint to pull daily stats on the number of active addresses for UTXO-based chains.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">blockchain</span><span class="p">(</span><span class="n">dadBlockchainId</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">addressSummary</span><span class="w"> </span><span class="p">(</span><span class="n">first</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">id</span><span class="w">
+            </span><span class="n">activeAddresses</span><span class="w">
+            </span><span class="n">newAddresses</span><span class="w">
+            </span><span class="n">totalAddressCount</span><span class="w">
+            </span><span class="n">assetId</span><span class="w">
+            </span><span class="n">projectId</span><span class="w">
+            </span><span class="n">timestamp</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"addressSummary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daily_address_summary__1583798400000__Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"activeAddresses"</span><span class="p">:</span><span class="w"> </span><span class="mi">826647</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"newAddresses"</span><span class="p">:</span><span class="w"> </span><span class="mi">429371</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"totalAddressCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">636211263</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"assetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-10T00:00:00"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-11'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h2 id='blockchain-miner-39-s-rolling-inventory'>Blockchain Miner&#39;s Rolling Inventory</h2>
+<p>Miner&#39;s Rolling Inventory is a metric that measures the extent to which miners are selling vs retaining the coins that they are generating/earning. We calculate Miner&#39;s Rolling Inventory daily over several different intervals: 1 day, 21 days, and 42 days. This endpoint also shows the total inventory still held by miners over each blockchain&#39;s history.</p>
+
+<blockquote>
+<p>Sample request:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight graphql tab-graphql"><code><span class="p">{</span><span class="w">
+  </span><span class="n">apiViewer</span><span class="p">(</span><span class="n">publicKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w"> </span><span class="n">privateKey</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">blockchain</span><span class="p">(</span><span class="n">dadBlockchainId</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">minerInventoryDaily</span><span class="w"> </span><span class="p">(</span><span class="n">first</span><span class="p">:</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">edges</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="n">node</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="n">id</span><span class="w">
+            </span><span class="n">timestamp</span><span class="w">
+            </span><span class="n">projectId</span><span class="w">
+            </span><span class="n">assetId</span><span class="w">
+            </span><span class="n">dailyMri</span><span class="w">
+            </span><span class="n">rolling21DayMri</span><span class="w">
+            </span><span class="n">rolling42DayMri</span><span class="w">
+            </span><span class="n">firstSpend</span><span class="w">
+            </span><span class="n">generated</span><span class="w">
+            </span><span class="n">unspentInventory</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"apiViewer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"blockchain"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"minerInventoryDaily"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"edges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"node"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"miner_inventory__Bitcoin_BTC__1585440000000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-29T00:00:00"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"projectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"assetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bitcoin_BTC_BTC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"dailyMri"</span><span class="p">:</span><span class="w"> </span><span class="mf">90.32193745820581</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rolling21DayMri"</span><span class="p">:</span><span class="w"> </span><span class="mf">104.4700141839271</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rolling42DayMri"</span><span class="p">:</span><span class="w"> </span><span class="mf">102.62442152253325</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"firstSpend"</span><span class="p">:</span><span class="w"> </span><span class="mf">1654.9668572299997</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"generated"</span><span class="p">:</span><span class="w"> </span><span class="mf">1832.29778258</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"unspentInventory"</span><span class="p">:</span><span class="w"> </span><span class="mf">1761104.563763461</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='query-parameters-12'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>No</td>
+<td>N/A</td>
+<td>ISO 8601 standard date</td>
+</tr>
+</tbody></table>
+<h1 id='websockets'>Websockets</h1>
+<p>To connect to websockets, you will need to include your public and private keys as query parameters.</p>
+
+<p>A sample URL is shown below.</p>
+
+<p><code>wss://api.digitalassetsdata.com/exchange/coinbase?publicKey={foo}&amp;privateKey={bar}</code></p>
+
+<p>Websockets are currently enabled for each exchange, so you can subscribe to a different websocket by swapping out <code>coinbase</code> for the key of any other supported exchange.</p>
+<h2 id='trades-2'>Trades</h2>
+<p>Trades can be pushed to you through the <code>exchange</code> websocket endpoint. That can be accessed from URLs formatted like this:</p>
+
+<p><code>wss://api.digitalassetsdata.com/exchange/coinbase?publicKey={foo}&amp;privateKey={bar}</code></p>
+
+<p>We&#39;ve included an example here of a message that would subscribe to the trades channel for BTC/USD.</p>
+
+<blockquote>
+<p>Sample message:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w"> </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"trades"</span><span class="p">],</span><span class="w"> </span><span class="nl">"pairs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"BTC/USD"</span><span class="p">]}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="nl">"trade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.011304879561066628</span><span class="p">,</span><span class="w"> </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">8077.43017578125</span><span class="p">,</span><span class="w"> </span><span class="nl">"dadExchangeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coinbase"</span><span class="p">,</span><span class="w"> </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w"> </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">80911105</span><span class="p">,</span><span class="w"> </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1578687219514</span><span class="p">}}</span><span class="w">
+</span></code></pre></div>
+<p>The websocket will push all new trades on an ongoing basis. The websocket will not push historical trades.</p>
+<h3 id='message-parameters'>Message Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>ping or subscribe</td>
+</tr>
+<tr>
+<td>channels</td>
+<td>Yes</td>
+<td>trades</td>
+<td></td>
+</tr>
+<tr>
+<td>pair</td>
+<td>Yes</td>
+<td>BTC/USD</td>
+<td>The standardized pair/symbol</td>
+</tr>
+</tbody></table>
+<h2 id='derivative-trades'>Derivative Trades</h2>
+<p>Derivative trades can be pushed to you through the same <code>exchange</code> websocket endpoint. That can be accessed from URLs formatted like this:</p>
+
+<p><code>wss://api.digitalassetsdata.com/exchange/bitmex?publicKey={foo}&amp;privateKey={bar}</code></p>
+
+<blockquote>
+<p>Sample message:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w"> </span><span class="nl">"channels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"trades_derivatives"</span><span class="p">],</span><span class="w"> </span><span class="nl">"instruments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"XBTUSD"</span><span class="p">]}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="nl">"trade"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"instrumentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bitmex_XBTUSD"</span><span class="p">,</span><span class="w"> </span><span class="nl">"priceInQuote"</span><span class="p">:</span><span class="w"> </span><span class="mf">9432.5</span><span class="p">,</span><span class="w"> </span><span class="nl">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6b0cd966-ea5e-9cbf-89a8-0091e13a16e5"</span><span class="p">,</span><span class="w"> </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">50000.0</span><span class="p">,</span><span class="w"> </span><span class="nl">"isSell"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nl">"derivativeType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"swap"</span><span class="p">,</span><span class="w"> </span><span class="nl">"instrumentName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XBTUSD"</span><span class="p">,</span><span class="w"> </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1594244866243</span><span class="p">},</span><span class="w"> </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bitmex"</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>The websocket will push all new trades on an ongoing basis. The websocket will not push historical trades.</p>
+<h3 id='message-parameters-2'>Message Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>ping or subscribe</td>
+</tr>
+<tr>
+<td>channels</td>
+<td>Yes</td>
+<td>trades_derivatives</td>
+<td></td>
+</tr>
+<tr>
+<td>instruments</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>A list of the standardized derivative symbols</td>
+</tr>
+</tbody></table>
+<h2 id='prices-candles-2'>Prices / Candles</h2>
+<p>Prices can be pushed to you through the <code>prices</code> websocket endpoint. That can be accessed from this URL:</p>
+
+<p><code>wss://api.digitalassetsdata.com/prices?publicKey={foo}&amp;privateKey={bar}</code></p>
+
+<p>We&#39;ve included an example here of a message that would subscribe to 5 secondly prices for BTC/USD on Coinbase.</p>
+
+<blockquote>
+<p>Sample message:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w"> </span><span class="nl">"exchanges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"coinbase"</span><span class="p">],</span><span class="w"> </span><span class="nl">"pairs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"BTC/USD"</span><span class="p">],</span><span class="w"> </span><span class="nl">"windows"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"tumble_05s"</span><span class="p">]}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Sample response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.2951021194458</span><span class="p">,</span><span class="w"> </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">9360.0</span><span class="p">,</span><span class="w"> </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC/USD"</span><span class="p">,</span><span class="w"> </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1582673495000</span><span class="p">,</span><span class="w"> </span><span class="nl">"dadExchangeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNIFIED"</span><span class="p">,</span><span class="w"> </span><span class="nl">"windowType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tumble_05s"</span><span class="p">,</span><span class="w"> </span><span class="nl">"periodStart"</span><span class="p">:</span><span class="w"> </span><span class="mi">1582673495000</span><span class="p">,</span><span class="w"> </span><span class="nl">"periodEnd"</span><span class="p">:</span><span class="w"> </span><span class="mi">1582673500000</span><span class="p">,</span><span class="w"> </span><span class="nl">"open"</span><span class="p">:</span><span class="w"> </span><span class="mf">9359.23046875</span><span class="p">,</span><span class="w"> </span><span class="nl">"high"</span><span class="p">:</span><span class="w"> </span><span class="mf">9361.873046875</span><span class="p">,</span><span class="w"> </span><span class="nl">"low"</span><span class="p">:</span><span class="w"> </span><span class="mf">9358.7900390625</span><span class="p">,</span><span class="w"> </span><span class="nl">"close"</span><span class="p">:</span><span class="w"> </span><span class="mf">9361.07421875</span><span class="p">,</span><span class="w"> </span><span class="nl">"quoteVolume"</span><span class="p">:</span><span class="w"> </span><span class="mf">87002.1484375</span><span class="p">,</span><span class="w"> </span><span class="nl">"tradeCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">118</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>The websocket will push all newly generated prices that match your parameters on an ongoing basis, and may push a limited amount of historical prices on subscription.</p>
+<h3 id='message-parameters-3'>Message Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>Yes</td>
+<td>N/A</td>
+<td>ping or subscribe</td>
+</tr>
+<tr>
+<td>pairs</td>
+<td>Yes</td>
+<td>BTC/USD</td>
+<td>List of standardized pairs/symbols</td>
+</tr>
+<tr>
+<td>exchanges</td>
+<td>No</td>
+<td>UNIFIED</td>
+<td>List of exchanges</td>
+</tr>
+<tr>
+<td>windows</td>
+<td>No</td>
+<td>tumble_05s</td>
+<td>List of desired price windows/methodologies</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Window Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>tumble_01m</code></td>
+<td>Minutely prices</td>
+</tr>
+<tr>
+<td><code>tumble_05m</code></td>
+<td>5 minutely prices</td>
+</tr>
+<tr>
+<td><code>tumble_15m</code></td>
+<td>15 minutely prices</td>
+</tr>
+<tr>
+<td><code>tumble_01h</code></td>
+<td>Hourly prices</td>
+</tr>
+<tr>
+<td><code>tumble_01d</code></td>
+<td>Daily prices</td>
+</tr>
+</tbody></table>
+<h1 id='change-log'>Change Log</h1>
+<p>The Digital Assets Data API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Date</th>
+<th>Updates</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>7/8/2020</td>
+<td>- Added Order Book Metrics and Derivative Trades endpoints to the GraphQL API<br> - Added Derivative Trades to the websocket<br> - Updated price documentation to reflect currently supported windows</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The Digital Assets Data API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -450,36 +2064,8 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 <td>Bad Request -- Your request is invalid.</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Not Found -- The endpoint could not be found.</td>
 </tr>
 <tr>
 <td>500</td>
@@ -493,12 +2079,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-          </div>
       </div>
     </div>
   </body>
