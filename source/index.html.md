@@ -5,7 +5,7 @@ toc_footers:
 search: true
 ---
 # Introduction
-Welcome to the Digital Assets Data API documentation. This documentation provides detailed instructions for leveraging the DAD API. If you are looking to consume our market data outside of the platform, you have come to the right place.
+Welcome to the NYDIG Data API documentation. This documentation provides detailed instructions for leveraging the DAD API. If you are looking to consume our market data outside of the platform, you have come to the right place.
 
 If you need assistance consuming data from our APIs after reviewing this documentation, please reach out to us at <a href="mailto:support@digitalassetsdata.com" target="_blank">support@digitalassetsdata.com</a>.
 
@@ -155,7 +155,7 @@ When filtering by pair, every supported pair for each exchange will be returned,
 
 ## Trades
 
-You can pull individual trades on a per exchange/per pair basis. Historical trades are available for up to an hour at a time using the `startDate` and `endDate` parameters. You can use the parameters to cycle through historical trades and pull as much history as Digital Assets Data supports.
+You can pull individual trades on a per exchange/per pair basis. Historical trades are available for up to an hour at a time using the `startDate` and `endDate` parameters. You can use the parameters to cycle through historical trades and pull as much history as NYDIG Data supports.
 
 > Sample request:
 
@@ -321,7 +321,7 @@ The record limit for the prices endpoint is 100,000
 
 ## Order Book Metrics
 
-Digital Assets Data calculates a variety of metrics based on order book snapshots, such as spread, depth, resiliency, and slippage. These metrics are calculated at a variety of different levels based on percentages or the number of price levels.
+NYDIG calculates a variety of metrics based on order book snapshots, such as spread, depth, resiliency, and slippage. These metrics are calculated at a variety of different levels based on percentages or the number of price levels.
 
 ```graphql
 {
@@ -895,7 +895,7 @@ The record limit for the transactions endpoint is 100,000
 
 ## Blockchain UTXO Age Bands
 
-You can use this endpoint to pull daily UTXO age band data based on Digital Assets Data's default age bands. The `reportDate` corresponds to the date in the blockchain's history and `ageBandPercent` shows the percentage of UTXO volume within the relevant age band. 
+You can use this endpoint to pull daily UTXO age band data based on NYDIG Data's default age bands. The `reportDate` corresponds to the date in the blockchain's history and `ageBandPercent` shows the percentage of UTXO volume within the relevant age band. 
 
 > Sample request:
 
@@ -958,7 +958,7 @@ endTime | No | N/A | ISO 8601 standard date |
 
 ### Age Bands
 
-The default age bands used by Digital Assets Data are listed below.
+The default age bands used by NYDIG Data are listed below.
 
 Age Band | Description 
 --------- | -------
@@ -1282,7 +1282,7 @@ Window Type | Description
 `tumble_01d` | Daily prices
 
 # Change Log
-The Digital Assets Data API uses the following error codes:
+The NYDIG Data API uses the following error codes:
 
 Date | Updates
 ---------- | -------
@@ -1290,7 +1290,7 @@ Date | Updates
 
 
 # Errors
-The Digital Assets Data API uses the following error codes:
+The NYDIG Data API uses the following error codes:
 
 Error Code | Meaning
 ---------- | -------
